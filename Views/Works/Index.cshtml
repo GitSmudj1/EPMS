@@ -1,0 +1,328 @@
+﻿@model EPMSAppDemo.Models.PiecesOfWork
+
+<style>
+    .paginate_button {
+        cursor: pointer;
+        font-size: large;
+        color: black;
+    }
+
+    th {
+        cursor: pointer;
+    }
+</style>
+
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+
+<!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+
+
+@{
+    ViewBag.Title = "Work";
+}
+
+<h2>
+    Work
+    @foreach (var item in Model.Entries.Take(1))
+        {
+            <p1 class="notbold">
+                (From @Html.DisplayFor(modelItem => item.Record.TimePeriodBegin) To
+                @Html.DisplayFor(modelItem => item.Record.TimePeriodEnd))
+            </p1>
+        }
+</h2>
+
+
+@Html.ActionLink("Create New", "Create", new { id = Model.RecordId })
+
+
+
+<p>
+
+</p>
+
+
+<table id="table" class="table table-condensed table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                WorkItem
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                DateCompleted
+            </th>
+            <th>
+                Project
+            </th>
+            <th>
+                Category
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @{
+        int i = 0;
+    }
+
+    <tbody>
+        @foreach (var item in Model.Entries)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkItem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCompleted)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Project.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @*Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+
+                @{
+                    i++;
+                }
+            </tr>
+                    }
+    </tbody>
+</table>
+
+<p align="center"><a href="@Url.Action("Index", "Records")" class="btn btn-primary btn-lg">Submit This Record</a></p>
+
+<p>
+    @Html.ActionLink("Back to Records", "Index", "Records", new { id = Model.RecordId }, null)
+</p>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+
+
+    //// The id value of the table tag.
+    //var TableIDvalue = "table";
+    ////////////////////////////////////////
+    //var TableLastSortedColumn = -1;
+    //function SortTable() {
+    //    var sortColumn = parseInt(arguments[0]);
+    //    var type = arguments.length > 1 ? arguments[1] : 'T';
+    //    var dateformat = arguments.length > 2 ? arguments[2] : '';
+    //    var table = document.getElementById(TableIDvalue);
+    //    var tbody = table.getElementsByTagName("tbody")[0];
+    //    var rows = tbody.getElementsByTagName("tr");
+    //    var arrayOfRows = new Array();
+    //    type = type.toUpperCase();
+    //    dateformat = dateformat.toLowerCase();
+    //    for (var i = 0, len = rows.length; i < len; i++) {
+    //        arrayOfRows[i] = new Object;
+    //        arrayOfRows[i].oldIndex = i;
+    //        var celltext = rows[i].getElementsByTagName("td")[sortColumn].innerHTML.replace(/<[^>]*>/g, "");
+    //        if (type == 'D') { arrayOfRows[i].value = GetDateSortingKey(dateformat, celltext); }
+    //        else {
+    //            var re = type == "N" ? /[^\.\-\+\d]/g : /[^a-zA-Z0-9]/g;
+    //            arrayOfRows[i].value = celltext.replace(re, "").substr(0, 25).toLowerCase();
+    //        }
+    //    }
+    //    if (sortColumn == TableLastSortedColumn) { arrayOfRows.reverse(); }
+    //    else {
+    //        TableLastSortedColumn = sortColumn;
+    //        switch (type) {
+    //            case "N": arrayOfRows.sort(CompareRowOfNumbers); break;
+    //            case "D": arrayOfRows.sort(CompareRowOfNumbers); break;
+    //            default: arrayOfRows.sort(CompareRowOfText);
+    //        }
+    //    }
+    //    var newTableBody = document.createElement("tbody");
+    //    for (var i = 0, len = arrayOfRows.length; i < len; i++) {
+    //        newTableBody.appendChild(rows[arrayOfRows[i].oldIndex].cloneNode(true));
+    //    }
+    //    table.replaceChild(newTableBody, tbody);
+    //    init();
+    //} // function SortTable()
+
+    //function CompareRowOfText(a, b) {
+    //    var aval = a.value;
+    //    var bval = b.value;
+    //    return (aval == bval ? 0 : (aval > bval ? 1 : -1));
+    //} // function CompareRowOfText()
+
+    //function CompareRowOfNumbers(a, b) {
+    //    var aval = /\d/.test(a.value) ? parseFloat(a.value) : 0;
+    //    var bval = /\d/.test(b.value) ? parseFloat(b.value) : 0;
+    //    return (aval == bval ? 0 : (aval > bval ? 1 : -1));
+    //} // function CompareRowOfNumbers()
+
+    //function GetDateSortingKey(format, text) {
+    //    if (format.length < 1) { return ""; }
+    //    format = format.toLowerCase();
+    //    text = text.toLowerCase();
+    //    text = text.replace(/^[^a-z0-9]*/, "", text);
+    //    text = text.replace(/[^a-z0-9]*$/, "", text);
+    //    if (text.length < 1) { return ""; }
+    //    text = text.replace(/[^a-z0-9]+/g, ",", text);
+    //    var date = text.split(",");
+    //    if (date.length < 3) { return ""; }
+    //    var d = 0, m = 0, y = 0;
+    //    for (var i = 0; i < 3; i++) {
+    //        var ts = format.substr(i, 1);
+    //        if (ts == "d") { d = date[i]; }
+    //        else if (ts == "m") { m = date[i]; }
+    //        else if (ts == "y") { y = date[i]; }
+    //    }
+    //    if (d < 10) { d = "0" + d; }
+    //    if (/[a-z]/.test(m)) {
+    //        m = m.substr(0, 3);
+    //        switch (m) {
+    //            case "jan": m = 1; break;
+    //            case "feb": m = 2; break;
+    //            case "mar": m = 3; break;
+    //            case "apr": m = 4; break;
+    //            case "may": m = 5; break;
+    //            case "jun": m = 6; break;
+    //            case "jul": m = 7; break;
+    //            case "aug": m = 8; break;
+    //            case "sep": m = 9; break;
+    //            case "oct": m = 10; break;
+    //            case "nov": m = 11; break;
+    //            case "dec": m = 12; break;
+    //            default: m = 0;
+    //        }
+    //    }
+    //    if (m < 10) { m = "0" + m; }
+    //    y = parseInt(y);
+    //    if (y < 100) { y = parseInt(y) + 2000; }
+    //    return "" + String(y) + "" + String(m) + "" + String(d) + "";
+    //}// function GetDateSortingKey()
+
+    $(document).ready(function () {
+        $('#table_info').hide();
+        $('#table_length').show();
+    });
+
+        //function to show/hide the descriptions that have too much text
+    $("table tr td:nth-child(3)").each(function (index) {
+        //grab the text within the description
+        var description = $(this).html().toString();
+        //counter to track the number of times clicked
+        var clickCount = 0;
+        //if the length is too long then we have to cut it down
+        if (description.length > 100) {
+            $(this).addClass("pointer");
+            $(this).prop('title', 'Read More');
+            $(this).html(description.substring(0, 60) + "...")
+
+            if ($(this).click(function () {
+                clickCount++;
+                    var as = document.getElementById('table');
+                //var row = as.rows[index + 1];
+                if (Math.abs(clickCount) % 2 == 1) {
+                $(this).prop('title', 'Read Less');
+
+                 $(this).html(description)
+                //row.cells[2].innerHTML = description;
+            } else if (clickCount % 2 == 0) {
+                $(this).prop('title', 'Read More');
+                 $(this).html(description.substring(0, 60) + "...")
+                //row.cells[2].innerHTML = description.substring(0, 60) + "...";
+            }
+            }));
+
+        }
+    });
+
+
+
+    //        //$("#button_" + index).click(function () {
+    //        //    $("#button_" + index).hide();
+    //        //    $("#button2_" + index).show();
+    //        //    var as = document.getElementById('table');
+    //        //    var row = as.rows[index + 1];
+    //        //    alert(row.cells[2].innerHTML)
+    //        //    row.cells[2].innerHTML = description;
+    //        //});
+
+    //        //$("#button2_" + index).click(function () {
+    //        //    $("#button2_" + index).hide();
+    //        //    $("#button_" + index).show();
+    //        //    var as = document.getElementById('table');
+    //        //    var row = as.rows[index + 1];
+    //        //    row.cells[2].innerHTML = description.substring(0, 60) + "...";
+    //        //});
+
+
+    //    });
+
+    //}
+
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+
+        "date-uk-pre": function (a) {
+
+            if (a == null || a == "") {
+
+                return 0;
+
+            }
+
+            var ukDatea = a.split('/');
+
+            return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+
+        },
+
+
+
+        "date-uk-asc": function (a, b) {
+
+            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+
+        },
+
+
+
+        "date-uk-desc": function (a, b) {
+
+            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+
+        }
+
+    });
+
+   var table =  $("#table").dataTable({
+
+        columnDefs: [
+
+{ type: 'date-uk', targets: 0 }
+
+        ],
+
+        "aaSorting": [[0, "desc"]]
+
+
+    });
+
+
+
+</script>

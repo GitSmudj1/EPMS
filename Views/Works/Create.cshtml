@@ -1,0 +1,145 @@
+﻿@model EPMSAppDemo.Models.Work
+
+@{
+    ViewBag.Title = "Create";
+}
+<script src="~/Scripts/jquery-1.11.1.js"></script>
+<script src="~/Scripts/jquery-ui-1.10.0.js"></script>
+<link href="~/Content/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+<!--<script src="~/Scripts/jquery.datetimepicker.js"></script>
+<link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />-->
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<h2>Create TimeEntry</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <fieldset>
+        <legend>Work</legend>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateDue)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateDue) (If not specified, DateDue = today's date)
+            @*Html.ValidationMessageFor(model => model.DateCompleted)*@
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateCompleted)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateCompleted)
+            @*Html.ValidationMessageFor(model => model.DateCompleted)*@
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WorkItem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WorkItem)
+            @Html.ValidationMessageFor(model => model.WorkItem)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        <div>
+            @Html.HiddenFor(model => model.tempTimeBegin)
+            @Html.HiddenFor(model => model.tempTimeEnd)
+
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HoursWorked)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HoursWorked)
+            @Html.ValidationMessageFor(model => model.HoursWorked)
+        </div>
+
+        <div class="editor-label">
+            @Html.HiddenFor(model => model.HoursRemaining)
+        </div>
+
+        <div class="editor-label">
+            @Html.HiddenFor(model => model.SubmittedDate)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Work_Project, "Project")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Work_Project", String.Empty)
+            @Html.ValidationMessageFor(model => model.Work_Project)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Work_Category, "Category")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Work_Category", String.Empty)
+            @Html.ValidationMessageFor(model => model.Work_Category)
+        </div>
+
+        @Html.HiddenFor(model => model.Work_Record)
+        @Html.HiddenFor(model => model.Id)
+
+
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { id = Model.Work_Record })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script type="text/javascript">
+
+    //$('#DateCompleted').val('@Model.tempTimeBegin.ToShortDateString()');
+    $('#HoursWorked').val('');
+
+    $('#WorkItem').attr("maxlength", "40");
+
+    var strBegin =("@Model.tempTimeBegin");
+    var strEnd = ("@Model.tempTimeEnd");
+
+    
+
+    jQuery("#DateCompleted").datepicker({
+        dateFormat: "dd/mm/yy",
+        minDate: strBegin,
+        maxDate: strEnd
+    });
+
+    //$('#DateDue').val(new Date().dateFormat('dd/mm/yy'));
+    jQuery("#DateDue").datepicker({
+        dateFormat: "dd/mm/yy",
+        minDate: strBegin,
+        maxDate: strEnd
+    });
+
+
+
+</script>
