@@ -195,6 +195,7 @@ namespace EPMSAppDemo.Controllers
                 tempTimeEnd = timeend,
                 Id = -1,
                 Work_Record = id,
+                HoursWorked = 0,
                 SubmittedDate = DateTime.Now
             };
 
@@ -212,7 +213,18 @@ namespace EPMSAppDemo.Controllers
         {
             if (ModelState.IsValid)
             {
+                
+                if(work.DateCompleted > work.DateDue)
+                {
 
+                    work.Late = 1;
+                    
+                } else
+                {
+                    work.Late = 0;
+                }
+                
+                work.HoursWorked = 0;
                 work.Id = db.Works.Max(i => i.Id + 1); 
                 db.Works.Add(work);
                 db.SaveChanges();

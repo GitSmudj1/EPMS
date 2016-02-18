@@ -50,10 +50,10 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
+            @Html.LabelFor(model => model.Description, "Description/Comments")
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new {@cols="90", @rows="6" })
             @Html.ValidationMessageFor(model => model.Description)
         </div>
         <div>
@@ -62,12 +62,12 @@
 
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.HoursWorked)
+            @Html.HiddenFor(model => model.HoursWorked)
         </div>
-        <div class="editor-field">
+        @*<div class="editor-field">
             @Html.EditorFor(model => model.HoursWorked)
             @Html.ValidationMessageFor(model => model.HoursWorked)
-        </div>
+        </div>*@
 
         <div class="editor-label">
             @Html.HiddenFor(model => model.HoursRemaining)
@@ -121,6 +121,7 @@
     $('#HoursWorked').val('');
 
     $('#WorkItem').attr("maxlength", "40");
+    
 
     var strBegin =("@Model.tempTimeBegin");
     var strEnd = ("@Model.tempTimeEnd");

@@ -11,7 +11,8 @@ namespace EPMSAppDemo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Record
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +25,9 @@ namespace EPMSAppDemo.Models
         public int Id { get; set; }
         public string Status { get; set; }
         public Nullable<System.DateTime> SubmittedDate { get; set; }
+        [DataType(DataType.Date)]
         public System.DateTime TimePeriodBegin { get; set; }
+        [DataType(DataType.Date)]
         public System.DateTime TimePeriodEnd { get; set; }
         public byte[] RowVersion { get; set; }
         public int Record_Employee { get; set; }
