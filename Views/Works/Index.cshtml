@@ -126,6 +126,15 @@
 
 <script type="text/javascript">
 
+    $("table tr td:nth-child(6)").each(function (index) {
+        
+        var lateVal = $(this).html();
+        if (lateVal == 1) {
+            $(this).html("Y");
+        } else if (lateVal == 0) {
+            $(this).html("N");
+        }
+    });
 
     //// The id value of the table tag.
     //var TableIDvalue = "table";

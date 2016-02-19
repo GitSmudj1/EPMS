@@ -16,11 +16,11 @@ namespace EPMSAppDemo.Models
     public partial class Work
     {
         public int Id { get; set; }
-        //[DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> DateCompleted { get; set; }
-        //[DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> DateDue { get; set; }
         public string WorkItem { get; set; }
         public string Description { get; set; }
@@ -33,12 +33,18 @@ namespace EPMSAppDemo.Models
         public int Work_Project { get; set; }
         public int Work_Category { get; set; }
         public Nullable<int> Late { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime tempTimeBegin { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime tempTimeEnd { get; set; }
 
 
         public virtual Category Category { get; set; }
         public virtual Project Project { get; set; }
         public virtual Record Record { get; set; }
+
+
     }
 }

@@ -29,7 +29,7 @@
             @Html.LabelFor(model => model.DateDue)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.DateDue) (If not specified, DateDue = today's date)
+            @Html.EditorFor(model => model.DateDue, new { htmlAttributes = new { @min = Model.tempTimeBegin.ToString("yyyy-MM-dd"), @max = Model.tempTimeEnd.ToString("yyyy-MM-dd") } }) (If not specified, DateDue = today's date)
             @*Html.ValidationMessageFor(model => model.DateCompleted)*@
         </div>
 
@@ -37,7 +37,8 @@
             @Html.LabelFor(model => model.DateCompleted)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.DateCompleted)
+            
+            @Html.EditorFor(model => model.DateCompleted, new { htmlAttributes = new { @min= Model.tempTimeBegin.ToString("yyyy-MM-dd"), @max = Model.tempTimeEnd.ToString("yyyy-MM-dd") } })
             @*Html.ValidationMessageFor(model => model.DateCompleted)*@
         </div>
 
@@ -100,7 +101,7 @@
 
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create" id="submitb"/>
         </p>
     </fieldset>
 }
@@ -121,25 +122,36 @@
     $('#HoursWorked').val('');
 
     $('#WorkItem').attr("maxlength", "40");
-    
 
-    var strBegin =("@Model.tempTimeBegin");
-    var strEnd = ("@Model.tempTimeEnd");
 
-    
+    //var strBegin =("@Model.tempTimeBegin");
+    //var strEnd = ("@Model.tempTimeEnd");
 
-    jQuery("#DateCompleted").datepicker({
-        dateFormat: "dd/mm/yy",
+ 
+
+
+
+    /*jQuery("#DateCompleted").datepicker({
+        inline: true,
+        //dateFormat: "dd/mm/yy",
         minDate: strBegin,
         maxDate: strEnd
-    });
+    });*/
 
     //$('#DateDue').val(new Date().dateFormat('dd/mm/yy'));
-    jQuery("#DateDue").datepicker({
-        dateFormat: "dd/mm/yy",
+   /* jQuery("#DateDue").datepicker({
+        inline: true,
+       // dateFormat: "dd/mm/yy",
         minDate: strBegin,
         maxDate: strEnd
-    });
+    });*/
+
+    //var form_id = $(this).closest("form").attr('id');
+
+    /*$('#submitb').click(function (event) {
+
+        form_id.submit();
+    });*/
 
 
 

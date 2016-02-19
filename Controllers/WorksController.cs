@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EPMSAppDemo.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace EPMSAppDemo.Controllers
 {
@@ -14,6 +15,14 @@ namespace EPMSAppDemo.Controllers
     {
         //Create a new instance of the database to allow us to access it
         private EPMSDevEntities db = new EPMSDevEntities();
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime timebegin { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime timeend { get; set; }
 
 
 
@@ -184,8 +193,14 @@ namespace EPMSAppDemo.Controllers
             ViewBag.Work_Category = new SelectList(db.Categories.Where(i => i.IsActive == true).OrderBy(x => x.Name), "Id", "Name");
             ViewBag.Work_TimeSheet = new SelectList(db.Records, "Id", "Status");
 
-            var timebegin = db.Records.First(i => i.Id == id).TimePeriodBegin;
-            var timeend = db.Records.First(i => i.Id == id).TimePeriodEnd;
+
+            
+
+
+            timebegin = db.Records.First(i => i.Id == id).TimePeriodBegin;
+            timeend = db.Records.First(i => i.Id == id).TimePeriodEnd;
+
+            
 
 
             //Create the new time entry
@@ -211,6 +226,9 @@ namespace EPMSAppDemo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Work work)
         {
+
+            
+
             if (ModelState.IsValid)
             {
                 
@@ -224,6 +242,7 @@ namespace EPMSAppDemo.Controllers
                     work.Late = 0;
                 }
                 
+
                 work.HoursWorked = 0;
                 work.Id = db.Works.Max(i => i.Id + 1); 
                 db.Works.Add(work);

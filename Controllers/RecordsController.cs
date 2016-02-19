@@ -85,10 +85,28 @@ namespace EPMSAppDemo.Controllers
 
             var records = db.Records.Where(i => i.Record_Employee == getUser);
 
-            var getFirstRecord = records.Max(i => i.Id);
+            var noRecords = db.Records.Count(i => i.Record_Employee == getUser);
 
-            var getPreviousRecordTimeBegin = records.First(i => i.Record_Employee == getUser && i.Id == getFirstRecord).TimePeriodBegin;
-            var getPreviousRecordTimeEnd = records.First(i => i.Record_Employee == getUser && i.Id == getFirstRecord).TimePeriodEnd;
+            var startDate = DateTime.Now;
+
+            if (noRecords == 0)
+            {
+                
+
+                startDate = DateTime.Now;
+                    }else if (noRecords > 0)
+                {
+                var getFirstRecord = records.Max(i => i.Id);
+                var getPreviousRecordTimeBegin = records.First(i => i.Record_Employee == getUser && i.Id == getFirstRecord).TimePeriodBegin;
+                var getPreviousRecordTimeEnd = records.First(i => i.Record_Employee == getUser && i.Id == getFirstRecord).TimePeriodEnd;
+                startDate = getPreviousRecordTimeBegin.AddMonths(3);
+                }
+            
+
+            
+
+            
+           
 
             Record record = new Record()
             {
@@ -96,8 +114,8 @@ namespace EPMSAppDemo.Controllers
                 //WorkDate = timeentry.WorkDate,
                 Id = db.Records.Max(i => i.Id + 1),
                 Status = "Open",
-                TimePeriodBegin = getPreviousRecordTimeBegin.AddMonths(3),
-                TimePeriodEnd = getPreviousRecordTimeEnd.AddMonths(3),
+                TimePeriodBegin = startDate,
+                TimePeriodEnd = startDate.AddMonths(3),
                 Record_Employee = getUser,
                 SubmittedDate = DateTime.Now
             };

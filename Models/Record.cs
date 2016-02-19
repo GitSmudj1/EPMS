@@ -25,10 +25,12 @@ namespace EPMSAppDemo.Models
         public int Id { get; set; }
         public string Status { get; set; }
         public Nullable<System.DateTime> SubmittedDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        public System.DateTime TimePeriodBegin { get; set; }
+        public DateTime TimePeriodBegin { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        public System.DateTime TimePeriodEnd { get; set; }
+        public DateTime TimePeriodEnd { get; set; }
         public byte[] RowVersion { get; set; }
         public int Record_Employee { get; set; }
     
