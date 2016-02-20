@@ -26,35 +26,35 @@
 
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.DateDue)
+            @Html.LabelFor(model => model.DateDue, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.DateDue, new { htmlAttributes = new { @min = Model.tempTimeBegin.ToString("yyyy-MM-dd"), @max = Model.tempTimeEnd.ToString("yyyy-MM-dd") } }) (If not specified, DateDue = today's date)
+            @Html.EditorFor(model => model.DateDue, new { htmlAttributes = new { @min = Model.tempTimeBegin.ToString("yyyy-MM-dd"), @max = Model.tempTimeEnd.ToString("yyyy-MM-dd"), @class = "form-control" } })
             @*Html.ValidationMessageFor(model => model.DateCompleted)*@
         </div>
-
+        (If not specified, DateDue = today's date)
         <div class="editor-label">
-            @Html.LabelFor(model => model.DateCompleted)
+            @Html.LabelFor(model => model.DateCompleted, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="editor-field">
             
-            @Html.EditorFor(model => model.DateCompleted, new { htmlAttributes = new { @min= Model.tempTimeBegin.ToString("yyyy-MM-dd"), @max = Model.tempTimeEnd.ToString("yyyy-MM-dd") } })
+            @Html.EditorFor(model => model.DateCompleted, new { htmlAttributes = new { @min= Model.tempTimeBegin.ToString("yyyy-MM-dd"), @max = Model.tempTimeEnd.ToString("yyyy-MM-dd"), @class = "form-control" } })
             @*Html.ValidationMessageFor(model => model.DateCompleted)*@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.WorkItem)
+            @Html.LabelFor(model => model.WorkItem, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.WorkItem)
-            @Html.ValidationMessageFor(model => model.WorkItem)
+            @Html.EditorFor(model => model.WorkItem, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.WorkItem, "", new { @class = "text-danger" })
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Description, "Description/Comments")
+            @Html.LabelFor(model => model.Description, "Description/Comments", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Description, new {@cols="90", @rows="6" })
+            @Html.TextAreaFor(model => model.Description, new {@cols="90", @rows="6", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Description)
         </div>
         <div>
@@ -80,19 +80,19 @@
 
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Work_Project, "Project")
+            @Html.LabelFor(model => model.Work_Project, "Project", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="editor-field">
-            @Html.DropDownList("Work_Project", String.Empty)
-            @Html.ValidationMessageFor(model => model.Work_Project)
+            @Html.DropDownList("Work_Project", null, String.Empty, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Work_Project, "", new { @class = "text-danger" })
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Work_Category, "Category")
+            @Html.LabelFor(model => model.Work_Category, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="editor-field">
-            @Html.DropDownList("Work_Category", String.Empty)
-            @Html.ValidationMessageFor(model => model.Work_Category)
+            @Html.DropDownList("Work_Category", null, String.Empty, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Work_Category, "", new { @class = "text-danger" })
         </div>
 
         @Html.HiddenFor(model => model.Work_Record)
@@ -100,9 +100,11 @@
 
 
 
-        <p>
-            <input type="submit" value="Create" id="submitb"/>
-        </p>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
     </fieldset>
 }
 

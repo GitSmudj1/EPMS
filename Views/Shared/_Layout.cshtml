@@ -96,8 +96,9 @@
                     {
                     <li><a href="#" data-toggle="dropdown" class="dropdown-toggle">Administration<b class="caret"></b></a>
                         <ul class="dropdown-menu" id="menu1">
-                            <b><li>@Html.ActionLink("Manage Employees", "Index", "Employees")</li></b>
-                            <b><li>@Html.ActionLink("Manage Projects", "Index", "Projects")</li></b>
+                            <li>@Html.ActionLink("Manage Employees", "Index", "Employees")</li>
+                            <li>@Html.ActionLink("Manage Projects", "Index", "Projects")</li>
+                            <li>@Html.ActionLink("Register New Account", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                         </ul></li>
                     }
                     @*<ul>*@

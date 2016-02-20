@@ -162,6 +162,23 @@ namespace EPMSAppDemo.Controllers
         }
 
         // GET: Records/Edit/5
+        public ActionResult SubmitRecord(int id)
+        {
+
+            Record record = db.Records.Find(id);
+
+            record.Status = "Submitted";
+            if (record == null)
+            {
+                return HttpNotFound();
+            }
+            db.Entry(record).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+        // GET: Records/Edit/5
         public ActionResult Edit(int id)
         {
 

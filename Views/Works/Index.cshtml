@@ -100,7 +100,7 @@
                     @Html.DisplayFor(modelItem => item.Late)
                 </td>
                 <td>
-                    @*Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
 
@@ -112,7 +112,11 @@
     </tbody>
 </table>
 
-<p align="center"><a href="@Url.Action("Index", "Records")" class="btn btn-primary btn-lg">Submit This Record</a></p>
+
+
+
+
+<p almoign="center"><a href="@Url.Action("SubmitRecord", "Records", new { id = Model.RecordId }, null)" class="btn btn-primary btn-lg">Submit This Record</a></p>
 
 <p>
     @Html.ActionLink("Back to Records", "Index", "Records", new { id = Model.RecordId }, null)
