@@ -39,6 +39,7 @@ namespace EPMSAppDemo.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime tempTimeEnd { get; set; }
+        public Boolean IsRecSubmitted { get; set; }
 
 
         public virtual Category Category { get; set; }

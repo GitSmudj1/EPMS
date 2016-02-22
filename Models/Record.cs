@@ -33,7 +33,8 @@ namespace EPMSAppDemo.Models
         public DateTime TimePeriodEnd { get; set; }
         public byte[] RowVersion { get; set; }
         public int Record_Employee { get; set; }
-    
+        
+
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Performance> Performances { get; set; }

@@ -101,21 +101,20 @@
                             <li>@Html.ActionLink("Register New Account", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                         </ul></li>
                     }
-                    @*<ul>*@
-
 
                         @*if the user is a manager in the db then show them this link*@
                         @*if (EPMSAppDemo.Controllers.RecordsController.isManager() == true)
-                        {
-                            <b><li style="font-size:24px">@Html.ActionLink("Manage Employees", "Index", "Employees")</li></b>
-                                @*<b><li style="font-size:24px">@Html.ActionLink("Latest TimeSheets", "Index", "AdminTimeSheets")</li></b>*@
-                                @*<b><li style="font-size:24px">@Html.ActionLink("Manage Categories", "Index", "Categories")</li></b>*@
-                                @*<b><li style="font-size:24px">@Html.ActionLink("Manage Teams", "Index", "Teams")</li></b>*@
-                                @*<b><li style="font-size:24px">@Html.ActionLink("Manage Projects", "Index", "Projects")</li></b>
-                        }
+            {
+                <b><li style="font-size:24px">@Html.ActionLink("Manage Employees", "Index", "Employees")</li></b>
+                    @*<b><li style="font-size:24px">@Html.ActionLink("Latest TimeSheets", "Index", "AdminTimeSheets")</li></b>*@
+                        @*<b><li style="font-size:24px">@Html.ActionLink("Manage Categories", "Index", "Categories")</li></b>*@
+                        @*<b><li style="font-size:24px">@Html.ActionLink("Manage Teams", "Index", "Teams")</li></b>*@
+                        @*<b><li style="font-size:24px">@Html.ActionLink("Manage Projects", "Index", "Projects")</li></b>
+                }
+            </ul>
+            </li>*@
+                        <hr>
                     </ul>
-                    </li>*@<hr>
-                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

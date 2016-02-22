@@ -275,6 +275,7 @@ table {
     page-break-after: avoid;
   }
   .navbar {
+      background-color:aqua;
     display: none;
   }
   .table td,
@@ -4501,7 +4502,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
+  background-color: cadetblue;
   border-color: #080808;
 }
 

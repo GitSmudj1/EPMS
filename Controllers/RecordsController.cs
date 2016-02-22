@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using EPMSAppDemo.Models;
 using System.Data.Entity.Validation;
 using Microsoft.AspNet.Identity;
+using WebGrease.Css.Extensions;
 
 namespace EPMSAppDemo.Controllers
 {
@@ -112,6 +113,7 @@ namespace EPMSAppDemo.Controllers
             {
                 //Get the values of the current time entry and insert into the time entry created
                 //WorkDate = timeentry.WorkDate,
+           
                 Id = db.Records.Max(i => i.Id + 1),
                 Status = "Open",
                 TimePeriodBegin = startDate,
@@ -166,8 +168,11 @@ namespace EPMSAppDemo.Controllers
         {
 
             Record record = db.Records.Find(id);
-
+           
+            
             record.Status = "Submitted";
+           
+            
             if (record == null)
             {
                 return HttpNotFound();
