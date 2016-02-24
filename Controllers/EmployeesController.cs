@@ -38,23 +38,67 @@ namespace EPMSAppDemo.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            return View();
+            ViewBag.Employee_Employee = new SelectList(db.Employees, "Id", "FirstName");
+            Employee employee = new Employee();
+            return View(employee);
         }
 
         // POST: Employees/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //
+        // POST: /Employees/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,UserName,RowVersion,Employee_Employee,IsActive,Team")] Employee employee)
+        [ValidateInput(false)]
+        public ActionResult Create(Employee employee)
         {
+            //get the current user's team using the username
+            var usersTeam = db.Employees.Single(i => i.UserName == @User.Identity.Name).Team1.TeamName;
+            var usersTeamNum = db.Employees.Single(i => i.UserName == @User.Identity.Name).Team;
+            //get the current user's id using the username
+            var usersId = db.Employees.First(i => i.UserName == @User.Identity.Name).Id;
+
             if (ModelState.IsValid)
             {
+
+                //employee.Team1.Id = db.Employees.First(i => i.UserName == @User.Identity.Name).Team;
+                employee.Team1.TeamName = usersTeam;
+                //employee.Team = usersTeamNum;
+                //db.Employees.Add(employee);
+
+                employee.Employee_Employee = usersId;
+                employee.Id = db.Employees.Max(i => i.Id + 1);
+                employee.Team = usersTeamNum;
+
                 db.Employees.Add(employee);
-                db.SaveChanges();
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            // raise a new exception nesting
+                            // the current instance as InnerException
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Employee_Employee = new SelectList(db.Employees, "Id", "FirstName", employee.Employee_Employee);
             return View(employee);
         }
 
@@ -78,10 +122,14 @@ namespace EPMSAppDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,UserName,RowVersion,Employee_Employee,IsActive,Team")] Employee employee)
+        public ActionResult Edit(Employee employee)
         {
+            var currentEmployeeId = db.Employees.First(i => i.UserName == @User.Identity.Name).Id;
             if (ModelState.IsValid)
             {
+
+                employee.Employee_Employee = currentEmployeeId;
+                employee.Team = employee.Team1.Id;
                 db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

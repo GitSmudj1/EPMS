@@ -275,7 +275,6 @@ table {
     page-break-after: avoid;
   }
   .navbar {
-      background-color:aqua;
     display: none;
   }
   .table td,
@@ -4417,7 +4416,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   color: #555555;
-  background-color: #3072AC;
+  background-color: #e7e7e7;
 }
 
 .navbar-default .navbar-nav > .disabled > a,
@@ -4442,7 +4441,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #3072AC;
+  border-color: #e6e6e6;
 }
 
 .navbar-default .navbar-nav > .dropdown > a:hover .caret,
@@ -4498,21 +4497,21 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-link:hover {
-  color: #3072AC;
+  color: #333333;
 }
 
 .navbar-inverse {
-  background-color: #3072AC;
-  border-color: #777777;
+  background-color: #222222;
+  border-color: #080808;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #3072AC;
+  color: #999999;
 }
 
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #3072AC;
+  color: #ffffff;
   background-color: transparent;
 }
 

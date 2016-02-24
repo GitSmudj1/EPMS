@@ -35,22 +35,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RowVersion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RowVersion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Employee_Employee)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Employee_Employee)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.IsActive)
         </dt>
 
@@ -59,16 +43,22 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Team)
+            @Html.DisplayNameFor(model => model.Team1.TeamName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Team)
+            @Html.DisplayFor(model => model.Team1.TeamName)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @if (Model.UserName == User.Identity.Name)
+    {
+        @Html.ActionLink("Back to List", "Index")
+    } else if (Model.UserName != User.Identity.Name) {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    @Html.Raw(String.Format("<a href=\"#\" class = '' > | </a>"))
     @Html.ActionLink("Back to List", "Index")
+    }
 </p>

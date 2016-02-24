@@ -11,7 +11,8 @@ namespace EPMSAppDemo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,6 +28,7 @@ namespace EPMSAppDemo.Models
         public string LastName { get; set; }
         public string UserName { get; set; }
         public byte[] RowVersion { get; set; }
+        [DisplayName("Manager")]
         public Nullable<int> Employee_Employee { get; set; }
         public bool IsActive { get; set; }
         public int Team { get; set; }

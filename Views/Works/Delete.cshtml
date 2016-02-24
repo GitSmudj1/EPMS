@@ -44,35 +44,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HoursWorked)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HoursWorked)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HoursRemaining)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HoursRemaining)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.SubmittedDate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.SubmittedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RowVersion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RowVersion)
         </dd>
 
         <dt>
@@ -114,7 +90,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index", new { id = Model.Work_Record })
         </div>
     }
 </div>

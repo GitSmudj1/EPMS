@@ -1,15 +1,44 @@
 ﻿@model IEnumerable<EPMSAppDemo.Models.Employee>
 
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
+@foreach (var item in Model.Take(1))
+{
+<h2>@Html.DisplayFor(m => item.Team1.TeamName) Employees</h2>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+
+
+
+
+<style>
+    .paginate_button {
+        cursor: pointer;
+        font-size: large;
+        color: black;
+    }
+
+    th {
+        cursor: pointer;
+    }
+</style>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+
+<!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+
+<table id="table"  class="table table-condensed table-hover table-striped">
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -19,9 +48,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RowVersion)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Employee_Employee)
@@ -34,7 +60,8 @@
         </th>
         <th></th>
     </tr>
-
+        </thead>
+    <tbody>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -47,23 +74,97 @@
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RowVersion)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Employee_Employee)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsActive)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Team)
+            @Html.DisplayFor(modelItem => item.Team1.TeamName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Details", "Details", new { id=item.Id })
+            @*Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
         </td>
     </tr>
+
+    @Html.HiddenFor(model => item.Id)
+    @Html.HiddenFor(model => item.Team)
+    @Html.HiddenFor(model => item.Team1.TeamName)
+    @Html.HiddenFor(model => item.Team1.Id)
+}
+</tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
-</table>
+
+
+<script>
+
+
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+
+        "date-uk-pre": function (a) {
+
+            if (a == null || a == "") {
+
+                return 0;
+
+            }
+
+            var ukDatea = a.split('/');
+
+            return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+
+        },
+
+
+
+        "date-uk-asc": function (a, b) {
+
+            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+
+        },
+
+
+
+        "date-uk-desc": function (a, b) {
+
+            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+
+        }
+
+    });
+
+
+
+
+
+
+    $(document).ready(function () {
+        $('#table_info').hide();
+        $('#table_length').hide();
+    });
+
+
+    var table = $("#table").dataTable();
+
+
+
+    // this is not the best way to do this must have a look at
+    $('#ShowAll').change(function () {
+        var selectedValue = $(this).val();
+
+        if (this.checked == true) {
+           table.fnFilter("");
+        } else if (this.checked == false) {
+            table.fnFilter(true);
+        }
+    });
+
+</script>
