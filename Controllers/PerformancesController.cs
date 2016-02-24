@@ -48,10 +48,11 @@ namespace EPMSAppDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Justification,Aims,Grading,Status,EmployeeId")] Performance performance)
+        public ActionResult Create(Performance performance)
         {
             if (ModelState.IsValid)
             {
+                performance.Id = db.Performances.Max(i => i.Id + 1);
                 db.Performances.Add(performance);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -137,6 +137,52 @@ namespace EPMSAppDemo.Controllers
             return View(employee);
         }
 
+        public ActionResult RecordIndex(int? id = 0)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //get employee details using the employee id
+            Employee employee = db.Employees.Find(id);
+
+            //query the db and produce the list of records for the user
+            var m = db.Records.Where(i => i.Employee.UserName == employee.UserName).OrderBy(i => i.TimePeriodBegin);
+
+            //Get user name from the browser and use it to query the db
+            var username = @User.Identity.Name;
+
+
+            return View(m.ToList());
+        }
+
+        //
+        // GET: Admin view for timeentries
+
+        public ActionResult WorkIndex(int id = 0)
+        {
+            //get employee using the id parameter
+            Employee employee = db.Employees.Find(id);
+            //get value for employee id using the id parameter
+            var employeeId = db.Records.First(i => i.Id == id).Record_Employee;
+            //get the employee username using the employee id
+            var employeeUsername = db.Employees.First(i => i.Id == employeeId).UserName;
+            //grab all the pieces of work relevant to the specific employee
+            var entries = db.Works.Where(i => i.Record.Employee.UserName == employeeUsername && i.Work_Record == id)
+                .OrderByDescending(i => i.DateCompleted);
+
+            var timeEntries = new PiecesOfWork
+            {
+                RecordId = id,
+                Entries = entries
+            };
+
+
+            return View(timeEntries);
+        }
+
+
         // GET: Employees/Delete/5
         public ActionResult Delete(int? id)
         {
