@@ -137,12 +137,9 @@ namespace EPMSAppDemo.Controllers
             return View(employee);
         }
 
-        public ActionResult RecordIndex(int? id = 0)
+        public ActionResult RecordIndex(int id = 0)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+      
 
             //get employee details using the employee id
             Employee employee = db.Employees.Find(id);

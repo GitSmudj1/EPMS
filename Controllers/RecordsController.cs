@@ -164,6 +164,26 @@ namespace EPMSAppDemo.Controllers
         }
 
         // GET: Records/Edit/5
+        public ActionResult UpdateRecord(int id)
+        {
+            var getNewStatus = db.Performances.First(i => i.RecordId == id).Status;
+            Record record = db.Records.Find(id);
+
+
+
+            record.Status = getNewStatus;
+
+
+            if (record == null)
+            {
+                return HttpNotFound();
+            }
+            db.Entry(record).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("RecordIndex","Employees", new { id = record.Record_Employee });
+        }
+
+        // GET: Records/Edit/5
         public ActionResult SubmitRecord(int id)
         {
 

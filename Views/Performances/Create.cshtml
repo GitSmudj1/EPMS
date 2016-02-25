@@ -20,19 +20,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Justification, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Justification, new { htmlAttributes = new { @cols = "90", @rows = "10", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Justification, "", new { @class = "text-danger" })
-            </div>
+            @Html.HiddenFor(model => model.EmployeeId, "Employee")
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Aims, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Aims, new { htmlAttributes = new { @cols = "90", @rows = "10", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Aims, "", new { @class = "text-danger" })
-            </div>
+            @Html.HiddenFor(model => model.RecordId, "Employee")
         </div>
 
         <div class="form-group">
@@ -49,19 +41,27 @@
                 @Html.DropDownListFor(model => model.Status,
                   new List<SelectListItem> {
                        new SelectListItem { Value = "0" , Text = " " },
-                       new SelectListItem { Value = "1" , Text = "Satisfactory" },
-                       new SelectListItem { Value = "1" , Text = "Unsatisfactory" }
+                       new SelectListItem { Value = "Satisfactory" , Text = "Satisfactory" },
+                       new SelectListItem { Value = "Unsatisfactory" , Text = "Unsatisfactory" }
                     },
                   new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-</div>
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EmployeeId, "EmployeeId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Justification, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("EmployeeId", null, String.Empty, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.Justification, new { @cols = "80", @rows = "9", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Justification, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Aims, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Aims, new { @cols = "80", @rows = "9", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Aims, "", new { @class = "text-danger" })
             </div>
         </div>
 

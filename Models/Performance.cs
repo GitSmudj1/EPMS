@@ -11,16 +11,20 @@ namespace EPMSAppDemo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Performance
     {
         public int Id { get; set; }
         public string Justification { get; set; }
+        [DisplayName("Aims for next record")]
         public string Aims { get; set; }
+        [DisplayName("Mark out of 10")]
         public int Grading { get; set; }
+        [DisplayName("Grade")]
         public string Status { get; set; }
         public Nullable<int> EmployeeId { get; set; }
-        public Nullable<int> RecordId { get; set; }
+        public int RecordId { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Record Record { get; set; }

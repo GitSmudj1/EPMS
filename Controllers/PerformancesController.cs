@@ -7,17 +7,25 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EPMSAppDemo.Models;
+using System.Data.Entity.Validation;
 
 namespace EPMSAppDemo.Controllers
 {
     public class PerformancesController : Controller
     {
         private EPMSDevEntities db = new EPMSDevEntities();
+        
 
         // GET: Performances
         public ActionResult Index()
         {
-            var performances = db.Performances.Include(p => p.Employee);
+            var username = @System.Web.HttpContext.Current.User.Identity.Name;
+            //get the current user's id
+            var getUser = db.Employees.First(i => i.UserName == username).Id;
+
+            //return the current user's performance pages using the id 
+            var performances = db.Performances.Where(i => i.EmployeeId == getUser);
+            
             return View(performances.ToList());
         }
 
@@ -37,10 +45,15 @@ namespace EPMSAppDemo.Controllers
         }
 
         // GET: Performances/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "FirstName");
-            return View();
+            var empId = db.Works.First(i => i.Work_Record == id).Record.Record_Employee;
+            Performance performance = new Performance();
+            performance.RecordId = id;
+            performance.EmployeeId = empId;
+            
+            return View(performance);
         }
 
         // POST: Performances/Create
@@ -50,12 +63,38 @@ namespace EPMSAppDemo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Performance performance)
         {
+            
             if (ModelState.IsValid)
             {
+
+                
                 performance.Id = db.Performances.Max(i => i.Id + 1);
                 db.Performances.Add(performance);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    // Your code...
+                    // Could also be before try if you know the exception occurs in SaveChanges
+
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    // Retrieve the error messages as a list of strings.
+                    var errorMessages = ex.EntityValidationErrors
+                            .SelectMany(x => x.ValidationErrors)
+                            .Select(x => x.ErrorMessage);
+
+                    // Join the list to a single string.
+                    var fullErrorMessage = string.Join("; ", errorMessages);
+
+                    // Combine the original exception message with the new one.
+                    var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                    // Throw a new DbEntityValidationException with the improved exception message.
+                    throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                }
+
+                return RedirectToAction("UpdateRecord", "Records", new { id = performance.RecordId });
             }
 
             ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "FirstName", performance.EmployeeId);

@@ -98,6 +98,19 @@
     </tbody>
 </table>
 
+<p style="padding-top: 20px">
+    @foreach (var item in Model.Entries.Take(1))
+    {
+        if (item.Record.Status == "Submitted") {
+        <p almoign="center"><a href="@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success text-center btn-block">Create Performance Page</a></p>
+        }
+        else if (item.Record.Status == "Satisfactory" || item.Record.Status == "Unsatisfactory")
+        {
+            <p almoign="center"><a href="@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success btn-block disabled">Record Has Been Graded</a></p>
+        }
+    }
+
+
 @foreach (var item in Model.Entries.Take(1))
 {
     <p>
