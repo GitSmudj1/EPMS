@@ -165,7 +165,7 @@ else if (Model.Entries.Count() > 0)
         }
         else if (item.Record.Status == "Open")
         {
-    <p almoign="center"><a href="@Url.Action("SubmitRecord", "Records", new { id = Model.RecordId }, null)" class="btn btn-primary text-center btn-block">Submit This Record</a></p>
+    <p almoign="center"><a href="@Url.Action("SubmitRecord", "Records", new { id = Model.RecordId }, null)" class="btn btn-primary text-center btn-block" onclick="return confirm('Are you sure you want to submit this record?');">Submit This Record</a></p>
     }
 }
 }
@@ -287,6 +287,16 @@ else if (Model.Entries.Count() > 0)
     //    if (y < 100) { y = parseInt(y) + 2000; }
     //    return "" + String(y) + "" + String(m) + "" + String(d) + "";
     //}// function GetDateSortingKey()
+
+    $('#myButton').on('click', function(event) {
+        var r = confirm("Press a button");
+        if (r == true) {
+            x = "You pressed OK!";
+        } else {
+            x = "You pressed Cancel!";
+        }
+
+        });
 
     $(document).ready(function () {
         $('#table_info').hide();

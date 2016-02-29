@@ -6,6 +6,10 @@
 
 <h2>Details</h2>
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
 <div>
     <h4>Record</h4>
     <hr />
@@ -60,7 +64,11 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Submit Record" class="btn btn-primary" />
+    </div>
+</div>
+
+}

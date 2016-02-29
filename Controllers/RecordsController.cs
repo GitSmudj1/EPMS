@@ -22,8 +22,8 @@ namespace EPMSAppDemo.Controllers
         {
             EPMSDevEntities db = new EPMSDevEntities();
 
-        //Get user name from the browser and use it to query the db
-        var username = System.Web.HttpContext.Current.User.Identity.Name;
+            //Get user name from the browser and use it to query the db
+            var username = System.Web.HttpContext.Current.User.Identity.Name;
             if (username != "")
             {
                 //Get user's ID
@@ -92,28 +92,29 @@ namespace EPMSAppDemo.Controllers
 
             if (noRecords == 0)
             {
-                
+
 
                 startDate = DateTime.Now;
-                    }else if (noRecords > 0)
-                {
+            }
+            else if (noRecords > 0)
+            {
                 var getFirstRecord = records.Max(i => i.Id);
                 var getPreviousRecordTimeBegin = records.First(i => i.Record_Employee == getUser && i.Id == getFirstRecord).TimePeriodBegin;
                 var getPreviousRecordTimeEnd = records.First(i => i.Record_Employee == getUser && i.Id == getFirstRecord).TimePeriodEnd;
                 startDate = getPreviousRecordTimeBegin.AddMonths(3);
-                }
-            
+            }
 
-            
 
-            
-           
+
+
+
+
 
             Record record = new Record()
             {
                 //Get the values of the current time entry and insert into the time entry created
                 //WorkDate = timeentry.WorkDate,
-           
+
                 Id = db.Records.Max(i => i.Id + 1),
                 Status = "Open",
                 TimePeriodBegin = startDate,
@@ -167,7 +168,7 @@ namespace EPMSAppDemo.Controllers
         public ActionResult UpdateRecord(int id)
         {
             var getNewStatus = db.Performances.First(i => i.RecordId == id).Status;
-            
+
             Record record = db.Records.Find(id);
 
 
@@ -181,7 +182,7 @@ namespace EPMSAppDemo.Controllers
             }
             db.Entry(record).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("RecordIndex","Employees", new { id = record.Record_Employee });
+            return RedirectToAction("RecordIndex", "Employees", new { id = record.Record_Employee });
         }
 
         // GET: Records/Edit/5
@@ -189,11 +190,11 @@ namespace EPMSAppDemo.Controllers
         {
 
             Record record = db.Records.Find(id);
-           
-            
+
+
             record.Status = "Submitted";
-           
-            
+
+
             if (record == null)
             {
                 return HttpNotFound();
