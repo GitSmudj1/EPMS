@@ -30,13 +30,12 @@ namespace EPMSAppDemo.Controllers
         }
 
         // GET: Performances/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Performance performance = db.Performances.Find(id);
+         
+            var getPerformance = db.Performances.First(i => i.RecordId == id).Id;
+
+            Performance performance = db.Performances.Find(getPerformance);
             if (performance == null)
             {
                 return HttpNotFound();
@@ -61,39 +60,13 @@ namespace EPMSAppDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Performance performance)
+        public ActionResult Create([Bind(Include = "Id,Justification,Aims,Grading,Status,EmployeeId,RecordId")] Performance performance)
         {
-            
             if (ModelState.IsValid)
             {
-
-                
                 performance.Id = db.Performances.Max(i => i.Id + 1);
                 db.Performances.Add(performance);
-                try
-                {
-                    // Your code...
-                    // Could also be before try if you know the exception occurs in SaveChanges
-
-                    db.SaveChanges();
-                }
-                catch (DbEntityValidationException ex)
-                {
-                    // Retrieve the error messages as a list of strings.
-                    var errorMessages = ex.EntityValidationErrors
-                            .SelectMany(x => x.ValidationErrors)
-                            .Select(x => x.ErrorMessage);
-
-                    // Join the list to a single string.
-                    var fullErrorMessage = string.Join("; ", errorMessages);
-
-                    // Combine the original exception message with the new one.
-                    var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
-
-                    // Throw a new DbEntityValidationException with the improved exception message.
-                    throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
-                }
-
+                db.SaveChanges();
                 return RedirectToAction("UpdateRecord", "Records", new { id = performance.RecordId });
             }
 

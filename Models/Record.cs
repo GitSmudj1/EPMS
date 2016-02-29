@@ -21,7 +21,7 @@ namespace EPMSAppDemo.Models
             this.Performances = new HashSet<Performance>();
             this.Works = new HashSet<Work>();
         }
-    
+
         public int Id { get; set; }
         public string Status { get; set; }
         public Nullable<System.DateTime> SubmittedDate { get; set; }
@@ -33,7 +33,7 @@ namespace EPMSAppDemo.Models
         public DateTime TimePeriodEnd { get; set; }
         public byte[] RowVersion { get; set; }
         public int Record_Employee { get; set; }
-        
+
 
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

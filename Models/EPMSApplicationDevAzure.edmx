@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EPMSDevModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EPMSDevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'EPMSDev.dbo.aspnet_Applications' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="aspnet_Applications">
@@ -159,8 +159,8 @@ warning 6002: The table/view 'EPMSDev.dbo.aspnet_UsersInRoles' does not have a p
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Justification" Type="nchar" MaxLength="100" Nullable="false" />
-          <Property Name="Aims" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Justification" Type="varchar" MaxLength="900" />
+          <Property Name="Aims" Type="varchar" MaxLength="900" />
           <Property Name="Grading" Type="int" Nullable="false" />
           <Property Name="Status" Type="nchar" MaxLength="100" Nullable="false" />
           <Property Name="EmployeeId" Type="int" />
@@ -339,7 +339,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
           <Property Name="DateCompleted" Type="date" />
           <Property Name="DateDue" Type="date" />
           <Property Name="WorkItem" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="800" />
           <Property Name="HoursWorked" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="HoursRemaining" Type="decimal" Precision="18" Scale="2" />
           <Property Name="SubmittedDate" Type="datetime" Nullable="false" />
@@ -457,7 +457,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EPMSDevModel1StoreContainer">
+        <EntityContainer Name="EPMSDevModelStoreContainer">
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Performance" EntityType="Self.Performance" Schema="dbo" store:Type="Tables" />
@@ -655,7 +655,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="EPMSDevModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="EPMSDevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -690,8 +690,8 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Justification" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Aims" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Justification" Type="String" MaxLength="900" FixedLength="false" Unicode="false" />
+          <Property Name="Aims" Type="String" MaxLength="900" FixedLength="false" Unicode="false" />
           <Property Name="Grading" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="EmployeeId" Type="Int32" />
@@ -755,7 +755,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
           <Property Name="DateCompleted" Type="DateTime" Precision="0" />
           <Property Name="DateDue" Type="DateTime" Precision="0" />
           <Property Name="WorkItem" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
           <Property Name="HoursWorked" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="HoursRemaining" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="SubmittedDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -1098,7 +1098,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EPMSDevEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EPMSDevEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Performances" EntityType="Self.Performance" />
@@ -1162,9 +1162,9 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EPMSDevModel1StoreContainer" CdmEntityContainer="EPMSDevEntities1">
+        <EntityContainerMapping StorageEntityContainer="EPMSDevModelStoreContainer" CdmEntityContainer="EPMSDevEntities">
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="EPMSDevModel1.Category">
+            <EntityTypeMapping TypeName="EPMSDevModel.Category">
               <MappingFragment StoreEntitySet="Categories">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
@@ -1174,7 +1174,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="EPMSDevModel1.Employee">
+            <EntityTypeMapping TypeName="EPMSDevModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -1188,7 +1188,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Performances">
-            <EntityTypeMapping TypeName="EPMSDevModel1.Performance">
+            <EntityTypeMapping TypeName="EPMSDevModel.Performance">
               <MappingFragment StoreEntitySet="Performance">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Justification" ColumnName="Justification" />
@@ -1201,7 +1201,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="EPMSDevModel1.Project">
+            <EntityTypeMapping TypeName="EPMSDevModel.Project">
               <MappingFragment StoreEntitySet="Projects">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1223,7 +1223,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Records">
-            <EntityTypeMapping TypeName="EPMSDevModel1.Record">
+            <EntityTypeMapping TypeName="EPMSDevModel.Record">
               <MappingFragment StoreEntitySet="Records">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -1236,7 +1236,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Teams">
-            <EntityTypeMapping TypeName="EPMSDevModel1.Team">
+            <EntityTypeMapping TypeName="EPMSDevModel.Team">
               <MappingFragment StoreEntitySet="Teams">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TeamName" ColumnName="TeamName" />
@@ -1246,7 +1246,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Works">
-            <EntityTypeMapping TypeName="EPMSDevModel1.Work">
+            <EntityTypeMapping TypeName="EPMSDevModel.Work">
               <MappingFragment StoreEntitySet="Work">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
@@ -1265,7 +1265,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Applications">
-            <EntityTypeMapping TypeName="EPMSDevModel1.aspnet_Applications">
+            <EntityTypeMapping TypeName="EPMSDevModel.aspnet_Applications">
               <MappingFragment StoreEntitySet="aspnet_Applications">
                 <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
                 <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
@@ -1275,7 +1275,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Membership">
-            <EntityTypeMapping TypeName="EPMSDevModel1.aspnet_Membership">
+            <EntityTypeMapping TypeName="EPMSDevModel.aspnet_Membership">
               <MappingFragment StoreEntitySet="aspnet_Membership">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1302,7 +1302,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Profile">
-            <EntityTypeMapping TypeName="EPMSDevModel1.aspnet_Profile">
+            <EntityTypeMapping TypeName="EPMSDevModel.aspnet_Profile">
               <MappingFragment StoreEntitySet="aspnet_Profile">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
@@ -1313,7 +1313,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Roles">
-            <EntityTypeMapping TypeName="EPMSDevModel1.aspnet_Roles">
+            <EntityTypeMapping TypeName="EPMSDevModel.aspnet_Roles">
               <MappingFragment StoreEntitySet="aspnet_Roles">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -1324,7 +1324,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_SchemaVersions">
-            <EntityTypeMapping TypeName="EPMSDevModel1.aspnet_SchemaVersions">
+            <EntityTypeMapping TypeName="EPMSDevModel.aspnet_SchemaVersions">
               <MappingFragment StoreEntitySet="aspnet_SchemaVersions">
                 <ScalarProperty Name="Feature" ColumnName="Feature" />
                 <ScalarProperty Name="CompatibleSchemaVersion" ColumnName="CompatibleSchemaVersion" />
@@ -1333,7 +1333,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Users">
-            <EntityTypeMapping TypeName="EPMSDevModel1.aspnet_Users">
+            <EntityTypeMapping TypeName="EPMSDevModel.aspnet_Users">
               <MappingFragment StoreEntitySet="aspnet_Users">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1346,7 +1346,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_UsersInRoles">
-            <EntityTypeMapping TypeName="EPMSDevModel1.aspnet_UsersInRoles">
+            <EntityTypeMapping TypeName="EPMSDevModel.aspnet_UsersInRoles">
               <MappingFragment StoreEntitySet="aspnet_UsersInRoles">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -1354,7 +1354,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RolePermissions">
-            <EntityTypeMapping TypeName="EPMSDevModel1.RolePermission">
+            <EntityTypeMapping TypeName="EPMSDevModel.RolePermission">
               <MappingFragment StoreEntitySet="RolePermissions">
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
@@ -1362,7 +1362,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vw_aspnet_Applications">
-            <EntityTypeMapping TypeName="EPMSDevModel1.vw_aspnet_Applications">
+            <EntityTypeMapping TypeName="EPMSDevModel.vw_aspnet_Applications">
               <MappingFragment StoreEntitySet="vw_aspnet_Applications">
                 <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
                 <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
@@ -1372,7 +1372,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vw_aspnet_MembershipUsers">
-            <EntityTypeMapping TypeName="EPMSDevModel1.vw_aspnet_MembershipUsers">
+            <EntityTypeMapping TypeName="EPMSDevModel.vw_aspnet_MembershipUsers">
               <MappingFragment StoreEntitySet="vw_aspnet_MembershipUsers">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
@@ -1401,7 +1401,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vw_aspnet_Profiles">
-            <EntityTypeMapping TypeName="EPMSDevModel1.vw_aspnet_Profiles">
+            <EntityTypeMapping TypeName="EPMSDevModel.vw_aspnet_Profiles">
               <MappingFragment StoreEntitySet="vw_aspnet_Profiles">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
@@ -1410,7 +1410,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vw_aspnet_Roles">
-            <EntityTypeMapping TypeName="EPMSDevModel1.vw_aspnet_Roles">
+            <EntityTypeMapping TypeName="EPMSDevModel.vw_aspnet_Roles">
               <MappingFragment StoreEntitySet="vw_aspnet_Roles">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -1421,7 +1421,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vw_aspnet_Users">
-            <EntityTypeMapping TypeName="EPMSDevModel1.vw_aspnet_Users">
+            <EntityTypeMapping TypeName="EPMSDevModel.vw_aspnet_Users">
               <MappingFragment StoreEntitySet="vw_aspnet_Users">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1434,7 +1434,7 @@ warning 6002: The table/view 'EPMSDev.dbo.vw_aspnet_UsersInRoles' does not have 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vw_aspnet_UsersInRoles">
-            <EntityTypeMapping TypeName="EPMSDevModel1.vw_aspnet_UsersInRoles">
+            <EntityTypeMapping TypeName="EPMSDevModel.vw_aspnet_UsersInRoles">
               <MappingFragment StoreEntitySet="vw_aspnet_UsersInRoles">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />

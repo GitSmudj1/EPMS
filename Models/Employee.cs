@@ -22,7 +22,7 @@ namespace EPMSAppDemo.Models
             this.Records = new HashSet<Record>();
             this.Teams = new HashSet<Team>();
         }
-    
+
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -32,7 +32,7 @@ namespace EPMSAppDemo.Models
         public Nullable<int> Employee_Employee { get; set; }
         public bool IsActive { get; set; }
         public int Team { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Performance> Performances { get; set; }
         public virtual Employee Employees1 { get; set; }

@@ -143,12 +143,20 @@ else if (Model.Entries.Count() > 0)
 
     foreach (var item in Model.Entries.Take(1))
     {
-        if (item.Record.Status == "Submitted" || item.Record.Status == "Satisfactory" || item.Record.Status == "Unsatisfactory")
+        if (item.Record.Status == "Submitted")
         {
         <p almoign="center"><a href="@Url.Action("Submitted", "Records", new { id = Model.RecordId }, null)" class="btn btn-primary text-center btn-block disabled">Submitted</a></p>
-    }
-    else if (item.Record.Status == "Open")
-    {
+        }
+        else if (item.Record.Status == "Satisfactory                                                                                      ")
+        {
+            <p almoign="center"><a href="@Url.Action("Details", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success text-center btn-block">View Performance Page</a></p>
+        }
+        else if (item.Record.Status == "Unsatisfactory                                                                                      ")
+        {
+            <p almoign="center"><a href="@Url.Action("Details", "Performances", new { id = Model.RecordId }, null)" class="btn btn-danger text-center btn-block">View Performance Page</a></p>
+        }
+        else if (item.Record.Status == "Open")
+        {
     <p almoign="center"><a href="@Url.Action("SubmitRecord", "Records", new { id = Model.RecordId }, null)" class="btn btn-primary text-center btn-block">Submit This Record</a></p>
     }
 }
@@ -286,7 +294,7 @@ else if (Model.Entries.Count() > 0)
     });
 
         //function to show/hide the descriptions that have too much text
-    $("table tr td:nth-child(3)").each(function (index) {
+    $("table tr td:nth-child(2)").each(function (index) {
         //grab the text within the description
         var description = $(this).html().toString();
         //counter to track the number of times clicked

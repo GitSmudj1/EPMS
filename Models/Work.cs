@@ -41,7 +41,7 @@ namespace EPMSAppDemo.Models
         public DateTime tempTimeEnd { get; set; }
         public Boolean IsRecSubmitted { get; set; }
 
-
+        public virtual Performance Performance { get; set; }
         public virtual Category Category { get; set; }
         public virtual Project Project { get; set; }
         public virtual Record Record { get; set; }

@@ -38,13 +38,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Status,
-                  new List<SelectListItem> {
-                       new SelectListItem { Value = "0" , Text = " " },
-                       new SelectListItem { Value = "Satisfactory" , Text = "Satisfactory" },
-                       new SelectListItem { Value = "Unsatisfactory" , Text = "Unsatisfactory" }
+                @Html.DropDownListFor(model => model.Status, new SelectList(
+                  new List<Object>{
+                       new { value = 0 , text = ""  },
+                       new { value = "Satisfactory" , text = "Satisfactory" },
+                       new { value = "Unsatisfactory" , text = "Unsatisfactory"}
                     },
-                  new { @class = "form-control" })
+                  "value",
+                  "text",
+                   2), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
         </div>

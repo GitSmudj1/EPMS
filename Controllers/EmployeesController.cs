@@ -13,11 +13,30 @@ namespace EPMSAppDemo.Controllers
     public class EmployeesController : Controller
     {
         private EPMSDevEntities db = new EPMSDevEntities();
-        
-        // GET: Employees
+
+        // GET: /Employees/
+
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            bool isTeamManager;
+
+            //Get the employee ID using the logged in user
+            var getEmployeeID = db.Employees.First(i => i.UserName == User.Identity.Name).Id;
+            //Get the employee team using the employee ID
+            var getTeam = db.Employees.First(i => i.Id == getEmployeeID).Team;
+            //Get the manager using the employee team
+            var getManager = db.Teams.First(i => i.Id == getTeam).Manager;
+            //Get the ID of that manager
+            var getManagerTeam = db.Teams.First(i => i.Id == getTeam).Id;
+            //Check if the manager exists and return true
+            if (getManager == getEmployeeID)
+            {
+                isTeamManager = true;
+            }
+
+            //Get all employees that are under this team manager
+            var employees = db.Employees.Where(i => i.Team == getManagerTeam);
+            return View(employees.ToList());
         }
 
         // GET: Employees/Details/5

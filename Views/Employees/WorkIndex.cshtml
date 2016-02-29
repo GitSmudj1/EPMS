@@ -98,144 +98,157 @@
     </tbody>
 </table>
 
+@Html.HiddenFor(modelItem => Model.RecordId)
+
+
 <p style="padding-top: 20px">
     @foreach (var item in Model.Entries.Take(1))
     {
         if (item.Record.Status == "Submitted") {
         <p almoign="center"><a href="@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success text-center btn-block">Create Performance Page</a></p>
         }
-        else if (item.Record.Status == "Satisfactory" || item.Record.Status == "Unsatisfactory")
+        else if (item.Record.Status == "Satisfactory                                                                                        ")
         {
-            <p almoign="center"><a href="@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success btn-block disabled">Record Has Been Graded</a></p>
+            <p almoign = "center" ><a href = "@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success btn-block disabled">Record Has Been Graded</a></p>
+        }
+        else if (item.Record.Status == "Unsatisfactory                                                                                      ")
+        {
+            <p almoign = "center" ><a href = "@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success btn-block disabled">Record Has Been Graded</a></p>
+        }
+        else if (item.Record.Status == "Open")
+        {
+            <p almoign="center"><a href="@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success btn-block disabled">Record Has Not Been Submitted</a></p>
         }
     }
 
 
-@foreach (var item in Model.Entries.Take(1))
-{
+
     <p>
-        @Html.ActionLink("Back to Records", "RecordIndex", "Employees", new { id = item.Record.Employee.Id }, null)
+        @Html.ActionLink("Back To Employees", "Index", "Employees")
     </p>
-}
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<p>
+    @Html.ActionLink("Performance Page For Record", "Details", "Performances", new { id = Model.RecordId }, null)
+</p>
 
-<script type="text/javascript">
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+    <script type="text/javascript">
 
 
-    //$('#approveButton').click(function () {
-    //    if (window.confirm("Are you sure you want to approve?")) {
-    //        return true;
-    //    }
-    //    return false;
-    //});
+        //$('#approveButton').click(function () {
+        //    if (window.confirm("Are you sure you want to approve?")) {
+        //        return true;
+        //    }
+        //    return false;
+        //});
 
-    $(document).ready(function () {
-        $('#table_info').hide();
-        //$('#table_length').hide();
-    });
+        $(document).ready(function () {
+            $('#table_info').hide();
+            //$('#table_length').hide();
+        });
 
         //function to show/hide the descriptions that have too much text
-    $("table tr td:nth-child(3)").each(function (index) {
-        //grab the text within the description
-        var description = $(this).html().toString();
-        //counter to track the number of times clicked
-        var clickCount = 0;
-        //if the length is too long then we have to cut it down
-        if (description.length > 100) {
-            $(this).addClass("pointer");
-            $(this).prop('title', 'Read More');
-            $(this).html(description.substring(0, 60) + "...")
-
-            if ($(this).click(function () {
-                clickCount++;
-                    var as = document.getElementById('table');
-                //var row = as.rows[index + 1];
-                if (Math.abs(clickCount) % 2 == 1) {
-                $(this).prop('title', 'Read Less');
-
-                 $(this).html(description)
-                //row.cells[2].innerHTML = description;
-            } else if (clickCount % 2 == 0) {
+        $("table tr td:nth-child(3)").each(function (index) {
+            //grab the text within the description
+            var description = $(this).html().toString();
+            //counter to track the number of times clicked
+            var clickCount = 0;
+            //if the length is too long then we have to cut it down
+            if (description.length > 100) {
+                $(this).addClass("pointer");
                 $(this).prop('title', 'Read More');
-                 $(this).html(description.substring(0, 60) + "...")
-                //row.cells[2].innerHTML = description.substring(0, 60) + "...";
-            }
-            }));
+                $(this).html(description.substring(0, 60) + "...")
 
-        }
-    });
+                if ($(this).click(function () {
+                    clickCount++;
+                        var as = document.getElementById('table');
+                    //var row = as.rows[index + 1];
+                    if (Math.abs(clickCount) % 2 == 1) {
+                    $(this).prop('title', 'Read Less');
 
-
-
-    //        //$("#button_" + index).click(function () {
-    //        //    $("#button_" + index).hide();
-    //        //    $("#button2_" + index).show();
-    //        //    var as = document.getElementById('table');
-    //        //    var row = as.rows[index + 1];
-    //        //    alert(row.cells[2].innerHTML)
-    //        //    row.cells[2].innerHTML = description;
-    //        //});
-
-    //        //$("#button2_" + index).click(function () {
-    //        //    $("#button2_" + index).hide();
-    //        //    $("#button_" + index).show();
-    //        //    var as = document.getElementById('table');
-    //        //    var row = as.rows[index + 1];
-    //        //    row.cells[2].innerHTML = description.substring(0, 60) + "...";
-    //        //});
-
-
-    //    });
-
-    //}
-
-
-
-    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
-
-        "date-uk-pre": function (a) {
-
-            if (a == null || a == "") {
-
-                return 0;
+                     $(this).html(description)
+                    //row.cells[2].innerHTML = description;
+                } else if (clickCount % 2 == 0) {
+                    $(this).prop('title', 'Read More');
+                     $(this).html(description.substring(0, 60) + "...")
+                    //row.cells[2].innerHTML = description.substring(0, 60) + "...";
+                }
+                }));
 
             }
-
-            var ukDatea = a.split('/');
-
-            return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
-
-        },
+        });
 
 
 
-        "date-uk-asc": function (a, b) {
+        //        //$("#button_" + index).click(function () {
+        //        //    $("#button_" + index).hide();
+        //        //    $("#button2_" + index).show();
+        //        //    var as = document.getElementById('table');
+        //        //    var row = as.rows[index + 1];
+        //        //    alert(row.cells[2].innerHTML)
+        //        //    row.cells[2].innerHTML = description;
+        //        //});
 
-            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+        //        //$("#button2_" + index).click(function () {
+        //        //    $("#button2_" + index).hide();
+        //        //    $("#button_" + index).show();
+        //        //    var as = document.getElementById('table');
+        //        //    var row = as.rows[index + 1];
+        //        //    row.cells[2].innerHTML = description.substring(0, 60) + "...";
+        //        //});
 
-        },
+
+        //    });
+
+        //}
 
 
 
-        "date-uk-desc": function (a, b) {
+        jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 
-            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+            "date-uk-pre": function (a) {
 
-        }
+                if (a == null || a == "") {
 
-    });
+                    return 0;
 
-    $("#table").dataTable({
+                }
 
-        columnDefs: [
+                var ukDatea = a.split('/');
 
-{ type: 'date-uk', targets: 0 }
+                return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
 
-        ],
+            },
+
+
+
+            "date-uk-asc": function (a, b) {
+
+                return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+
+            },
+
+
+
+            "date-uk-desc": function (a, b) {
+
+                return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+
+            }
+
+        });
+
+        $("#table").dataTable({
+
+            columnDefs: [
+
+    { type: 'date-uk', targets: 0 }
+
+            ],
 
             "aaSorting": [[0, "desc"]]
 
@@ -245,4 +258,4 @@
 
 
 
-</script>
+    </script>

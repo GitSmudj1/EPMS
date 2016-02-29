@@ -24,8 +24,8 @@ namespace EPMSAppDemo.Models
         [DisplayName("Grade")]
         public string Status { get; set; }
         public Nullable<int> EmployeeId { get; set; }
-        public int RecordId { get; set; }
-    
+        public Nullable<int> RecordId { get; set; }
+
         public virtual Employee Employee { get; set; }
         public virtual Record Record { get; set; }
     }

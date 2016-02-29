@@ -100,7 +100,38 @@
     });
 
         //function to show/hide the descriptions that have too much text
-    $("table tr td:nth-child(3)").each(function (index) {
+    $("table tr td:nth-child(1)").each(function (index) {
+        //grab the text within the description
+        var description = $(this).html().toString();
+        //counter to track the number of times clicked
+        var clickCount = 0;
+        //if the length is too long then we have to cut it down
+        if (description.length > 100) {
+            $(this).addClass("pointer");
+            $(this).prop('title', 'Read More');
+            $(this).html(description.substring(0, 60) + "...")
+
+            if ($(this).click(function () {
+                clickCount++;
+                    var as = document.getElementById('table');
+                //var row = as.rows[index + 1];
+                if (Math.abs(clickCount) % 2 == 1) {
+                $(this).prop('title', 'Read Less');
+
+                 $(this).html(description)
+                //row.cells[2].innerHTML = description;
+            } else if (clickCount % 2 == 0) {
+                $(this).prop('title', 'Read More');
+                 $(this).html(description.substring(0, 60) + "...")
+                //row.cells[2].innerHTML = description.substring(0, 60) + "...";
+            }
+            }));
+
+        }
+    });
+
+    //function to show/hide the descriptions that have too much text
+    $("table tr td:nth-child(2)").each(function (index) {
         //grab the text within the description
         var description = $(this).html().toString();
         //counter to track the number of times clicked

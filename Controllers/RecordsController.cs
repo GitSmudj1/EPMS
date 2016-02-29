@@ -167,6 +167,7 @@ namespace EPMSAppDemo.Controllers
         public ActionResult UpdateRecord(int id)
         {
             var getNewStatus = db.Performances.First(i => i.RecordId == id).Status;
+            
             Record record = db.Records.Find(id);
 
 
