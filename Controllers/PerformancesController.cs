@@ -14,7 +14,32 @@ namespace EPMSAppDemo.Controllers
     public class PerformancesController : Controller
     {
         private EPMSDevEntities db = new EPMSDevEntities();
-        
+
+        public static bool isManager()
+        {
+            EPMSDevEntities db = new EPMSDevEntities();
+
+            //Get user name from the browser and use it to query the db
+            var username = System.Web.HttpContext.Current.User.Identity.Name;
+            if (username != "")
+            {
+                //Get user's ID
+                var userid = db.Employees.FirstOrDefault(i => i.UserName == username).Id;
+                //get ismanager value
+                var ismanager = false;//db.Records.First(i => i.Record_Employee == userid).IsTeamManager;
+                //Search the teams db to see if the user is a manager
+                var searchManager = db.Teams.Count(i => i.Manager == userid);
+
+                //If the user is a manager then set the flag to be true
+                if (searchManager > 0)
+                {
+                    ismanager = true;
+                }
+
+                return ismanager;
+            }
+            return false;
+        }
 
         // GET: Performances
         public ActionResult Index()

@@ -82,10 +82,15 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    @*Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                    @Html.ActionLink("See Record", "Index", "Works", new { id = item.Id }, null)
+                    
+                    @Html.ActionLink("See Record", "Index", "Works", new { id = item.Id }, null) | @if (item.Status == "Satisfactory                                                                                        ")
+                    {
+                        @Html.ActionLink("Performance Page", "Details", "Performances", new { id = item.Id }, null)
+                    }
+                    else if (item.Status == "Unsatisfactory                                                                                      ")
+                    {
+                        @Html.ActionLink("Performance Page", "Details", "Performances", new { id = item.Id }, null)
+                    }
                 </td>
             </tr>
         }

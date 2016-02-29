@@ -11,11 +11,27 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.DateCompleted)
+            @Html.DisplayNameFor(model => model.WorkItem)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateCompleted)
+            @Html.DisplayFor(model => model.WorkItem)
+        </dd>
+
+        <dt>
+            Project Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.Name)
+        </dd>
+
+        <dt>
+            Category Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
         </dd>
 
         <dt>
@@ -27,35 +43,33 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WorkItem)
+            @Html.DisplayNameFor(model => model.DateCompleted)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WorkItem)
+            @Html.DisplayFor(model => model.DateCompleted)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.Late)
+        </dt>
+        @if (Model.Late == 1)
+        {
+        <dd>
+            Y
+        </dd>
+        }
+        else if (Model.Late == 0)
+        {
+            <dd>
+                Y
+            </dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HoursWorked)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HoursWorked)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HoursRemaining)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HoursRemaining)
         </dd>
 
         <dt>
@@ -66,50 +80,24 @@
             @Html.DisplayFor(model => model.SubmittedDate)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RowVersion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RowVersion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Late)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Late)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Project.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Project.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Record.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Record.Status)
-        </dd>
-
     </dl>
 </div>
 <p>
   
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (EPMSAppDemo.Controllers.RecordsController.isManager())
+    {
+    @Html.ActionLink("Back to Employees", "Index", "Employees")
+    }else if (EPMSAppDemo.Controllers.RecordsController.isManager() == false)
+    {
+    @Html.ActionLink("Back to Records", "Index", "Records")
+    }
 </p>
+
+<script>
+    var lateVal = $('#Late').html();
+    if (lateVal == 1) {
+        $('#Late').html("Y");
+    } else if (lateVal == 0) {
+        $('#Late').html("N");
+    }
+</script>

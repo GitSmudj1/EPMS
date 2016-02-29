@@ -123,6 +123,14 @@ foreach (var item in Model.Entries.Take(1))
                         @Html.Raw(String.Format("<a href=\"#\" class = '' >|</a>"))
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     }
+                    else if (item.Record.Status == "Satisfactory                                                                                        ")
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    }
+                    else if (item.Record.Status == "Unsatisfactory                                                                                      ")
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    }
                 </td>
 
                 @{
@@ -147,13 +155,13 @@ else if (Model.Entries.Count() > 0)
         {
         <p almoign="center"><a href="@Url.Action("Submitted", "Records", new { id = Model.RecordId }, null)" class="btn btn-primary text-center btn-block disabled">Submitted</a></p>
         }
-        else if (item.Record.Status == "Satisfactory                                                                                      ")
+        else if (item.Record.Status == "Satisfactory                                                                                        ")
         {
-            <p almoign="center"><a href="@Url.Action("Details", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success text-center btn-block">View Performance Page</a></p>
+            <p almoign="center"><a href="@Url.Action("Details", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success text-center btn-block">Performance Page Created: View Here!</a></p>
         }
         else if (item.Record.Status == "Unsatisfactory                                                                                      ")
         {
-            <p almoign="center"><a href="@Url.Action("Details", "Performances", new { id = Model.RecordId }, null)" class="btn btn-danger text-center btn-block">View Performance Page</a></p>
+            <p almoign="center"><a href="@Url.Action("Details", "Performances", new { id = Model.RecordId }, null)" class="btn btn-danger text-center btn-block">Performance Page Created: View Here!</a></p>
         }
         else if (item.Record.Status == "Open")
         {

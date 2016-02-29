@@ -70,55 +70,69 @@ namespace EPMSAppDemo.Controllers
         //
         // GET: Get the values for the copy row function
 
-        public ActionResult Details(int id = 0)
+        /*     public ActionResult Details(int id = 0)
+             {
+                 //Get the time entry selected using the ID
+                 Work work = db.Works.Find(id);
+
+                 var timebegin = db.Records.First(i => i.Id == work.Work_Record).TimePeriodBegin;
+                 var timeend = db.Records.First(i => i.Id == work.Work_Record).TimePeriodEnd;
+
+                 //Create the new time entry
+                 Work work1 = new Work()
+                 {
+                     //Get the values of the current time entry and insert into the time entry created
+                     //WorkDate = timeentry.WorkDate,
+                     WorkItem = work.WorkItem,
+                     Description = work.Description,
+                     HoursWorked = work.HoursWorked,
+                     HoursRemaining = work.HoursRemaining,
+                     Work_Project = work.Work_Project,
+                     Work_Category = work.Work_Category,
+                     tempTimeBegin = timebegin,
+                     tempTimeEnd = timeend,
+                     Id = work.Work_Record,
+                     Work_Record = work.Work_Record,
+                     SubmittedDate = DateTime.Now
+                 };
+
+                 if (work == null)
+                 {
+                     return HttpNotFound();
+                 }
+                 return View(work1);
+             }
+
+             // POST: Copy row funtion
+
+             [HttpPost]
+             [ValidateAntiForgeryToken]
+             public ActionResult Details(Work work)
+             {
+                 if (ModelState.IsValid)
+                 {
+                     db.Works.Add(work);
+                     db.SaveChanges();
+                     return RedirectToAction("Index", new { id = work.Work_Record });
+                 }
+
+                 ViewBag.Work_Category = new SelectList(db.Categories.Where(i => i.IsActive == true).OrderBy(x => x.Name), "Id", "Name", work.Work_Category);
+                 ViewBag.Work_Project = new SelectList(db.Projects.OrderBy(x => x.Name), "Id", "Name", work.Work_Project);
+                 ViewBag.Work_Record = new SelectList(db.Records, "Id", "Status", work.Work_Record);
+                 return View(work);
+             }*/
+
+        // GET: Performances/Details/5
+        public ActionResult Details(int id)
         {
-            //Get the time entry selected using the ID
+
+            
+
             Work work = db.Works.Find(id);
-
-            var timebegin = db.Records.First(i => i.Id == work.Work_Record).TimePeriodBegin;
-            var timeend = db.Records.First(i => i.Id == work.Work_Record).TimePeriodEnd;
-
-            //Create the new time entry
-            Work work1 = new Work()
-            {
-                //Get the values of the current time entry and insert into the time entry created
-                //WorkDate = timeentry.WorkDate,
-                WorkItem = work.WorkItem,
-                Description = work.Description,
-                HoursWorked = work.HoursWorked,
-                HoursRemaining = work.HoursRemaining,
-                Work_Project = work.Work_Project,
-                Work_Category = work.Work_Category,
-                tempTimeBegin = timebegin,
-                tempTimeEnd = timeend,
-                Id = work.Work_Record,
-                Work_Record = work.Work_Record,
-                SubmittedDate = DateTime.Now
-            };
-
             if (work == null)
             {
                 return HttpNotFound();
             }
-            return View(work1);
-        }
-
-        // POST: Copy row funtion
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Details(Work work)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Works.Add(work);
-                db.SaveChanges();
-                return RedirectToAction("Index", new { id = work.Work_Record });
-            }
-
-            ViewBag.Work_Category = new SelectList(db.Categories.Where(i => i.IsActive == true).OrderBy(x => x.Name), "Id", "Name", work.Work_Category);
-            ViewBag.Work_Project = new SelectList(db.Projects.OrderBy(x => x.Name), "Id", "Name", work.Work_Project);
-            ViewBag.Work_Record = new SelectList(db.Records, "Id", "Status", work.Work_Record);
             return View(work);
         }
 

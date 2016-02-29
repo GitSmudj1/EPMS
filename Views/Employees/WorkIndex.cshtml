@@ -57,6 +57,7 @@
             <th data-column-id="Description">Description</th>
             <th data-column-id="Project">Project</th>
             <th data-column-id="Category">Category</th>
+            <th data-column-id="Link"></th>
         </tr>
     </thead>
     @{
@@ -90,10 +91,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Category.Name)
                 </td>
-                @{
-                    i++;
-                }
-            </tr>
+                <td>
+                    @Html.ActionLink("Details", "Details","Works", new { id = item.Id },null)
+                </td>
+                    @{
+                        i++;
+                    }
+</tr>
                     }
     </tbody>
 </table>
@@ -105,19 +109,19 @@
     @foreach (var item in Model.Entries.Take(1))
     {
         if (item.Record.Status == "Submitted") {
-        <p almoign="center"><a href="@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success text-center btn-block">Create Performance Page</a></p>
+        <p almoign="center"><a href="@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-primary text-center btn-block">Create Performance Page</a></p>
         }
         else if (item.Record.Status == "Satisfactory                                                                                        ")
         {
-            <p almoign = "center" ><a href = "@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success btn-block disabled">Record Has Been Graded</a></p>
+            <p almoign = "center" ><a href = "@Url.Action("Details", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success btn-block">Performance Page Created: View Here!</a></p>
         }
         else if (item.Record.Status == "Unsatisfactory                                                                                      ")
         {
-            <p almoign = "center" ><a href = "@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success btn-block disabled">Record Has Been Graded</a></p>
+            <p almoign = "center" ><a href = "@Url.Action("Details", "Performances", new { id = Model.RecordId }, null)" class="btn btn-danger btn-block">Performance Page Created: View Here!</a></p>
         }
         else if (item.Record.Status == "Open")
         {
-            <p almoign="center"><a href="@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success btn-block disabled">Record Has Not Been Submitted</a></p>
+            <p almoign="center"><a href="@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-primary btn-block disabled">Record Has Not Been Submitted</a></p>
         }
     }
 
@@ -127,9 +131,6 @@
         @Html.ActionLink("Back To Employees", "Index", "Employees")
     </p>
 
-<p>
-    @Html.ActionLink("Performance Page For Record", "Details", "Performances", new { id = Model.RecordId }, null)
-</p>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryui")
