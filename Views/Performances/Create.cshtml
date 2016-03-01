@@ -30,7 +30,23 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Grading, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Grading, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Grading, new SelectList(
+                  new List<Object>{
+                       new { value = 0 , text = "0"  },
+                       new { value = 1 , text = "1" },
+                       new { value = 2 , text = "2"},
+                       new { value = 3 , text = "3"},
+                       new { value = 4 , text = "4"},
+                       new { value = 5 , text = "5"},
+                       new { value = 6 , text = "6"},
+                       new { value = 7 , text = "7"},
+                       new { value = 8 , text = "8"},
+                       new { value = 9 , text = "9"},
+                       new { value = 10 , text = "10"},
+                    },
+                  "value",
+                  "text",
+                   11), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Grading, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,15 +54,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Status, new SelectList(
-                  new List<Object>{
-                       new { value = 0 , text = ""  },
-                       new { value = "Satisfactory" , text = "Satisfactory" },
-                       new { value = "Unsatisfactory" , text = "Unsatisfactory"}
-                    },
-                  "value",
-                  "text",
-                   2), new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.Status, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -82,3 +90,36 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    document.getElementById("Status").readOnly = true;
+    
+    var dropdown = document.getElementById("Grading");
+    var status = document.getElementById("Status");
+    dropdown.onchange = function (event) {
+        if(dropdown.value==0){
+            $('#Status').val("Unsatisfactory");
+        } else if (dropdown.value == 1) {
+            $('#Status').val("Unsatisfactory");
+        } else if (dropdown.value == 2) {
+            $('#Status').val("Unsatisfactory");
+        } else if (dropdown.value == 3) {
+            $('#Status').val("Unsatisfactory");
+        } else if (dropdown.value == 4) {
+            $('#Status').val("Unsatisfactory");
+        } else if (dropdown.value == 5) {
+            $('#Status').val("Satisfactory");
+        } else if (dropdown.value == 6) {
+            $('#Status').val("Satisfactory");
+        } else if (dropdown.value == 7) {
+            $('#Status').val("Satisfactory");
+        } else if (dropdown.value == 8) {
+            $('#Status').val("Very Good");
+        } else if (dropdown.value == 9) {
+            $('#Status').val("Very Good");
+        } else if (dropdown.value == 10) {
+            $('#Status').val("Very Good");
+        }
+
+    };
+</script>

@@ -119,6 +119,10 @@
         {
             <p almoign = "center" ><a href = "@Url.Action("Details", "Performances", new { id = Model.RecordId }, null)" class="btn btn-danger btn-block">Performance Page Created: View Here!</a></p>
         }
+        else if (item.Record.Status == "Very Good                                                                                           ")
+        {
+            <p almoign="center"><a href="@Url.Action("Details", "Performances", new { id = Model.RecordId }, null)" class="btn btn-success btn-block">Performance Page Created: View Here!</a></p>
+        }
         else if (item.Record.Status == "Open")
         {
             <p almoign="center"><a href="@Url.Action("Create", "Performances", new { id = Model.RecordId }, null)" class="btn btn-primary btn-block disabled">Record Has Not Been Submitted</a></p>
