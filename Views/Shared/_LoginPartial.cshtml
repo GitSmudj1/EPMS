@@ -7,6 +7,10 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
+            @if (EPMSAppDemo.Controllers.RecordsController.isManager() == true)
+            {
+            <li style="font-weight:bold; color:#3276b1; padding-top:16px">Team Manager</li>
+            }
         <li><a href="#" class="glyphicon glyphicon-user" style="padding-right:1px"></a>
         <li><a href="#">@User.Identity.GetUserName()</a></li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

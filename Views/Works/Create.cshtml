@@ -13,99 +13,104 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
-<h2>Create TimeEntry</h2>
+<h2>Create</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    
 
 
-    <fieldset>
-        <legend>Work</legend>
+    
+        <div class="form-horizontal">
+            <h4>Work</h4>
 
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateDue, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DateDue, new { htmlAttributes = new { @min = Model.tempTimeBegin.ToString("yyyy-MM-dd"), @max = Model.tempTimeEnd.ToString("yyyy-MM-dd"), @class = "form-control" } })
-            @*Html.ValidationMessageFor(model => model.DateCompleted)*@
-        </div>
-        (If not specified, DateDue = today's date)
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateCompleted, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="editor-field">
-            
-            @Html.EditorFor(model => model.DateCompleted, new { htmlAttributes = new { @min= Model.tempTimeBegin.ToString("yyyy-MM-dd"), @max = Model.tempTimeEnd.ToString("yyyy-MM-dd"), @class = "form-control" } })
-            @*Html.ValidationMessageFor(model => model.DateCompleted)*@
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.WorkItem, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.WorkItem, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.WorkItem, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description, "Description/Comments", htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Description, new {@cols="90", @rows="6", @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-        <div>
-            @Html.HiddenFor(model => model.tempTimeBegin)
-            @Html.HiddenFor(model => model.tempTimeEnd)
-
-        </div>
-        <div class="editor-label">
-            @Html.HiddenFor(model => model.HoursWorked)
-        </div>
-        @*<div class="editor-field">
-            @Html.EditorFor(model => model.HoursWorked)
-            @Html.ValidationMessageFor(model => model.HoursWorked)
-        </div>*@
-
-        <div class="editor-label">
-            @Html.HiddenFor(model => model.HoursRemaining)
-        </div>
-
-        <div class="editor-label">
-            @Html.HiddenFor(model => model.SubmittedDate)
-        </div>
-
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Work_Project, "Project", htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Work_Project", null, String.Empty, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Work_Project, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Work_Category, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Work_Category", null, String.Empty, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Work_Category, "", new { @class = "text-danger" })
-        </div>
-
-        @Html.HiddenFor(model => model.Work_Record)
-        @Html.HiddenFor(model => model.Id)
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateDue, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateDue, new { htmlAttributes = new { @min = Model.tempTimeBegin.ToString("yyyy-MM-dd"), @max = Model.tempTimeEnd.ToString("yyyy-MM-dd"), @class = "form-control" } })
+                    @*Html.ValidationMessageFor(model => model.DateCompleted)*@
+                    (If not specified, DateDue = today's date)
+                </div>
+                
             </div>
-        </div>
-    </fieldset>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateCompleted, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateCompleted, new { htmlAttributes = new { @min = Model.tempTimeBegin.ToString("yyyy-MM-dd"), @max = Model.tempTimeEnd.ToString("yyyy-MM-dd"), @class = "form-control" } })
+                    @*Html.ValidationMessageFor(model => model.DateCompleted)*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.WorkItem, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.WorkItem, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.WorkItem, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, "Description/Comments", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { @cols = "90", @rows = "6", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+            <div>
+                @Html.HiddenFor(model => model.tempTimeBegin)
+                @Html.HiddenFor(model => model.tempTimeEnd)
+
+            </div>
+            <div class="editor-label">
+                @Html.HiddenFor(model => model.HoursWorked)
+            </div>
+            @*<div class="editor-field">
+                @Html.EditorFor(model => model.HoursWorked)
+                @Html.ValidationMessageFor(model => model.HoursWorked)
+            </div>*@
+
+            <div class="editor-label">
+                @Html.HiddenFor(model => model.HoursRemaining)
+            </div>
+
+            <div class="editor-label">
+                @Html.HiddenFor(model => model.SubmittedDate)
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Work_Project, "Project", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                <div class="col-md-10">
+                    @Html.DropDownList("Work_Project", null, String.Empty, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Work_Project, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Work_Category, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                <div class="col-md-10">
+                    @Html.DropDownList("Work_Category", null, String.Empty, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Work_Category, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.Work_Record)
+            @Html.HiddenFor(model => model.Id)
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+            </div>
 }
 
 <div>

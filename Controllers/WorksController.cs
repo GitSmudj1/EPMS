@@ -31,28 +31,19 @@ namespace EPMSAppDemo.Controllers
 
 
         //
-        // GET: /TimeTrackerDev4/
+        // GET: /EPMMSDev4/
         [HttpGet]
         public ActionResult Index(int id = 0)
         {
             //get username
             var username = @User.Identity.Name;
 
-            //var test = db.TimeEntries.Where(i => i.TimeSheet.Employee.UserName == username)
-            //.Where(i => i.TimeSheet.Id == timesheet.Id);
-            //    //.Where(i => i.TimeSheet.TimeSheet_Employee == timeentry.TimeSheet.TimeSheet_Employee)
-            //    //.Where(i => i.TimeEntry_TimeSheet == timeentry.TimeEntry_TimeSheet);
 
-
-            //var m = db.TimeEntries.Where(i => i.TimeSheet.Employee.UserName == username)
-            //   .Where(i => i.TimeSheet.TimeSheet_Employee == testID1)
-            //   .Where(i => i.TimeEntry_TimeSheet == testID2);
-
-            //This query took a bit of time to produce and the issue was getting the ID of the time sheet to pass through 
-            //to the time entries view. My mistake was in the 'entries' URL: when creating this I had the ID and the null
+            //This query took a bit of time to produce and the issue was getting the ID of the record to pass through 
+            //to the work view. My mistake was in the 'work' URL: when creating this I had the ID and the null
             //value round the wrong way.
 
-            //Get the time entries from the database
+            //Get the work from the database
             var entries = db.Works.Where(i => i.Record.Employee.UserName == username && i.Work_Record == id)
                 .OrderByDescending(i => i.DateCompleted);
 
@@ -72,17 +63,16 @@ namespace EPMSAppDemo.Controllers
 
         /*     public ActionResult Details(int id = 0)
              {
-                 //Get the time entry selected using the ID
+                 //Get the work selected using the ID
                  Work work = db.Works.Find(id);
 
                  var timebegin = db.Records.First(i => i.Id == work.Work_Record).TimePeriodBegin;
                  var timeend = db.Records.First(i => i.Id == work.Work_Record).TimePeriodEnd;
 
-                 //Create the new time entry
+                 //Create the new work
                  Work work1 = new Work()
                  {
-                     //Get the values of the current time entry and insert into the time entry created
-                     //WorkDate = timeentry.WorkDate,
+                     //Get the values of the current work and insert into the work created
                      WorkItem = work.WorkItem,
                      Description = work.Description,
                      HoursWorked = work.HoursWorked,
@@ -201,7 +191,7 @@ namespace EPMSAppDemo.Controllers
         }
 
         //
-        // GET: /TimeTrackerDev4/Create
+        // GET: /EPMSDev4/Create
 
         public ActionResult Create(int id = 0)
         {
@@ -221,7 +211,7 @@ namespace EPMSAppDemo.Controllers
             
 
 
-            //Create the new time entry
+            //Create the new work
             Work work = new Work()
             {
                 tempTimeBegin = timebegin,
@@ -238,7 +228,7 @@ namespace EPMSAppDemo.Controllers
         }
 
         //
-        // POST: /TimeTrackerDev4/Create
+        // POST: /EPMSDev4/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -297,12 +287,12 @@ namespace EPMSAppDemo.Controllers
         }
 
         //
-        // GET: /TimeTrackerDev4/Edit/5
+        // GET: /EPMSDev4/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
 
-            //Find the time entry that the user wants to edit using the ID
+            //Find the work that the user wants to edit using the ID
             Work work = db.Works.Find(id);
 
             var timebegin = db.Records.First(i => i.Id == work.Work_Record).TimePeriodBegin;
@@ -322,7 +312,7 @@ namespace EPMSAppDemo.Controllers
         }
 
         //
-        // POST: /TimeTrackerDev4/Edit/5
+        // POST: /EPMSDev4/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -338,16 +328,16 @@ namespace EPMSAppDemo.Controllers
             }
             ViewBag.Work_Category = new SelectList(db.Categories.Where(i => i.IsActive == true).OrderBy(x => x.Name), "Id", "Name", work.Work_Category);
             ViewBag.Work_Project = new SelectList(db.Projects.OrderBy(x => x.Name), "Id", "Name", work.Work_Project);
-            ViewBag.TimeEntry_TimeSheet = new SelectList(db.Records, "Id", "Status", work.Work_Record);
+            ViewBag.Work_Record = new SelectList(db.Records, "Id", "Status", work.Work_Record);
             return View(work);
         }
 
         //
-        // GET: /TimeTrackerDev4/Delete/5
+        // GET: /EPMSDev4/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            //Find the time entry the user wants to delete by using the ID
+            //Find the work the user wants to delete by using the ID
             Work work = db.Works.Find(id);
             if (work == null)
             {
@@ -357,7 +347,7 @@ namespace EPMSAppDemo.Controllers
         }
 
         //
-        // POST: /TimeTrackerDev4/Delete/5
+        // POST: /EPMSDev4/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -112,8 +112,8 @@ namespace EPMSAppDemo.Controllers
 
             Record record = new Record()
             {
-                //Get the values of the current time entry and insert into the time entry created
-                //WorkDate = timeentry.WorkDate,
+                //Get the values of the current work and insert into the work created
+                //WorkDate = work.WorkDate,
 
                 Id = db.Records.Max(i => i.Id + 1),
                 Status = "Open",
