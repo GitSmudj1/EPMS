@@ -131,7 +131,7 @@ else if (Model.Entries.Count() > 0)
                 <td>
                     @if(item.Record.Status == "Open") {
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                        @Html.Raw(String.Format("<a href=\"#\" class = '' >|</a>"))
+                        @Html.Raw(String.Format("<a href=\"#\" class = '' > | </a>"))
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     }
                     else if (item.Record.Status == "Satisfactory                                                                                        ")

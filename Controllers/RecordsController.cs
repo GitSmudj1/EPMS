@@ -182,7 +182,7 @@ namespace EPMSAppDemo.Controllers
             }
             db.Entry(record).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("RecordIndex", "Employees", new { id = record.Record_Employee });
+            return RedirectToAction("email", "Performances", new { id = record.Id });
         }
 
         // GET: Records/Edit/5

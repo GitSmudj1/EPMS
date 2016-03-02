@@ -7,9 +7,11 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Performances", new { id = Model.RecordId }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+
+
     
     <div class="form-horizontal">
         <h4>Performance</h4>
@@ -81,7 +83,10 @@
             </div>
         </div>
     </div>
+
 }
+
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -122,4 +127,8 @@
         }
 
     };
+
+
+
 </script>
+

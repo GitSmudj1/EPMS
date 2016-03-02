@@ -8,12 +8,52 @@ using System.Web;
 using System.Web.Mvc;
 using EPMSAppDemo.Models;
 using System.Data.Entity.Validation;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace EPMSAppDemo.Controllers
 {
     public class PerformancesController : Controller
     {
         private EPMSDevEntities db = new EPMSDevEntities();
+
+        public async Task<ActionResult> email(FormCollection form, int Id)
+        {
+            var getRecordEmployee = db.Records.First(i => i.Id == Id).Record_Employee;
+            var name = form["sname"];
+            var email = form["semail"];
+            var messages = "A recent record has been graded by your manager. Please log on to the system using your details to view your performance page.";
+            var phone = form["sphone"];
+            var x = await SendEmail(name, email, messages, phone, Id);
+            if (x == "sent")
+            ViewData["esent"] = "Your Message Has Been Sent";
+            return RedirectToAction("RecordIndex", "Employees", new { id = getRecordEmployee });
+        }
+        private async Task<String> SendEmail(string name, string email, string messages, string phone, int Id)
+        {
+            var getRecordEmployee = db.Records.First(i => i.Id == Id).Record_Employee;
+            var getEmployeeEmail = db.Employees.First(i => i.Id == getRecordEmployee).UserName;
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(getEmployeeEmail));  // replace with receiver's email id  
+            message.From = new MailAddress("EPMSdonotreply@outlook.com");  // replace with sender's email id 
+            message.Subject = "EPMS Email Notification";
+            message.Body = messages;
+            message.IsBodyHtml = true;
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "EPMSdonotreply@outlook.com",  // replace with sender's email id 
+                    Password = "Txtekgsn1"  // replace with password 
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp.live.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(message);
+                return "sent";
+            }
+        }
 
         public static bool isManager()
         {

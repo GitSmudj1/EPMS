@@ -22,7 +22,10 @@ namespace EPMSAppDemo.Controllers
             //This is the integer value for the current user's team
             var userTeam = db.Employees.First(i => i.UserName == @User.Identity.Name).Team;
 
-            var records = db.Records.Where(i => i.Employee.Team == userTeam && i.Status == "Submitted");
+            var userId = db.Employees.First(i => i.UserName == @User.Identity.Name).Id;
+
+            var records = db.Records.Where(i => i.Employee.Team == userTeam && i.Status == "Submitted" || i.Employee.Employee_Employee == userId && i.Status == "Submitted");
+
             return View(records.ToList());
         }
 

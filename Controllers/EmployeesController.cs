@@ -59,6 +59,7 @@ namespace EPMSAppDemo.Controllers
         {
             ViewBag.Employee_Employee = new SelectList(db.Employees, "Id", "FirstName");
             Employee employee = new Employee();
+
             return View(employee);
         }
 
@@ -71,7 +72,7 @@ namespace EPMSAppDemo.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(Employee employee)
+        public ActionResult Create([Bind(Include = "Team,UserName,FirstName,LastName,IsActive")]Employee employee)
         {
             //get the current user's team using the username
             var usersTeam = db.Employees.Single(i => i.UserName == @User.Identity.Name).Team1.TeamName;
@@ -83,7 +84,7 @@ namespace EPMSAppDemo.Controllers
             {
 
                 //employee.Team1.Id = db.Employees.First(i => i.UserName == @User.Identity.Name).Team;
-                employee.Team1.TeamName = usersTeam;
+                //employee.Team1.TeamName = usersTeam;
                 //employee.Team = usersTeamNum;
                 //db.Employees.Add(employee);
 

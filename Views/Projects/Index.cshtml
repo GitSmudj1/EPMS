@@ -1,117 +1,160 @@
 ﻿@model IEnumerable<EPMSAppDemo.Models.Project>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Projects";
 }
 
-<h2>Index</h2>
+<style>
+    .paginate_button {
+        cursor: pointer;
+        font-size: large;
+        color: black;
+    }
+
+    th {
+        cursor: pointer;
+    }
+</style>
+
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+
+<!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+
+<h2>Projects</h2>
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RowVersion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DevTeam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ServiceDesk)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Operations)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Communications)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocalSupportWest)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocalSupportEast)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocalSupportNorth)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Admin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Trainers)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BusinessServicesDelivery)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BusinessServicesAnalysis)
-        </th>
-        <th></th>
-    </tr>
+<table id="table" class="table table-condensed table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th class="rotate">
+                @Html.DisplayNameFor(model => model.DevTeam)
+            </th>
+            <th class="rotate">
+                @Html.DisplayNameFor(model => model.ServiceDesk)
+            </th>
+            <th class="rotate">
+                @Html.DisplayNameFor(model => model.Operations)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RowVersion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DevTeam)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ServiceDesk)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Operations)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Communications)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocalSupportWest)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocalSupportEast)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocalSupportNorth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Admin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Trainers)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BusinessServicesDelivery)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BusinessServicesAnalysis)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.DevTeam, new { @disabled = "disabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.ServiceDesk, new { @disabled = "disabled" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.Operations, new { @disabled = "disabled" })
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
-</table>
+
+
+<script>
+
+
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+
+        "date-uk-pre": function (a) {
+
+            if (a == null || a == "") {
+
+                return 0;
+
+            }
+
+            var ukDatea = a.split('/');
+
+            return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+
+        },
+
+
+
+        "date-uk-asc": function (a, b) {
+
+            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+
+        },
+
+
+
+        "date-uk-desc": function (a, b) {
+
+            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+
+        }
+
+    });
+
+
+
+
+
+
+    $(document).ready(function () {
+        $('#table_info').hide();
+        $('#table_length').show();
+
+    });
+
+
+    var table = $("#table").DataTable();
+
+    // this is not the best way to do this must have a look at
+ /*   $('#ShowAll').change(function () {
+        var selectedValue = $(this).val();
+
+        if (this.checked == true) {
+            table.fnFilter("");
+        } else if (this.checked == false) {
+            table.fnFilter(true);
+        }
+    });*/
+
+</script>

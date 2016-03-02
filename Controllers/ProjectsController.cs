@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EPMSAppDemo.Models;
 
-namespace EPMSAppDemo.Controllers
+namespace TimeTracker.Controllers
 {
     public class ProjectsController : Controller
     {
         private EPMSDevEntities db = new EPMSDevEntities();
 
-        // GET: Projects
+        //
+        // GET: /EPMSDev2/
+
         public ActionResult Index()
         {
-            return View(db.Projects.ToList());
+            var projs = db.Projects.OrderBy(m => m.Name);
+
+            return View(projs.ToList());
         }
 
-        // GET: Projects/Details/5
-        public ActionResult Details(int? id)
+        //
+        // GET: /EPMSDev2/Details/5
+
+        public ActionResult Details(int id = 0)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Project project = db.Projects.Find(id);
             if (project == null)
             {
@@ -35,21 +36,24 @@ namespace EPMSAppDemo.Controllers
             return View(project);
         }
 
-        // GET: Projects/Create
+        //
+        // GET: /EPMSDev2/Create
+
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Projects/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //
+        // POST: /EPMSDev2/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,RowVersion,IsActive,DevTeam,ServiceDesk,Operations,Communications,LocalSupportWest,LocalSupportEast,LocalSupportNorth,Admin,Trainers,BusinessServicesDelivery,BusinessServicesAnalysis")] Project project)
+        public ActionResult Create(Project project)
         {
             if (ModelState.IsValid)
             {
+                project.Id = db.Projects.Max(i => i.Id + 1);
                 db.Projects.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -58,13 +62,11 @@ namespace EPMSAppDemo.Controllers
             return View(project);
         }
 
-        // GET: Projects/Edit/5
-        public ActionResult Edit(int? id)
+        //
+        // GET: /APMSDev2/Edit/5
+
+        public ActionResult Edit(int id = 0)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Project project = db.Projects.Find(id);
             if (project == null)
             {
@@ -73,12 +75,12 @@ namespace EPMSAppDemo.Controllers
             return View(project);
         }
 
-        // POST: Projects/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //
+        // POST: /EPMSDev2/Edit/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,RowVersion,IsActive,DevTeam,ServiceDesk,Operations,Communications,LocalSupportWest,LocalSupportEast,LocalSupportNorth,Admin,Trainers,BusinessServicesDelivery,BusinessServicesAnalysis")] Project project)
+        public ActionResult Edit(Project project)
         {
             if (ModelState.IsValid)
             {
@@ -89,13 +91,11 @@ namespace EPMSAppDemo.Controllers
             return View(project);
         }
 
-        // GET: Projects/Delete/5
-        public ActionResult Delete(int? id)
+        //
+        // GET: /EPMSDev2/Delete/5
+
+        public ActionResult Delete(int id = 0)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Project project = db.Projects.Find(id);
             if (project == null)
             {
@@ -104,7 +104,9 @@ namespace EPMSAppDemo.Controllers
             return View(project);
         }
 
-        // POST: Projects/Delete/5
+        //
+        // POST: /EPMSDev2/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -117,10 +119,7 @@ namespace EPMSAppDemo.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            db.Dispose();
             base.Dispose(disposing);
         }
     }

@@ -4,12 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Submitted Records</h2>
 
 </style>
 @foreach (var item in Model.Take(1))
 {
-    <h2>@item.Employee.Team1.TeamName Records</h2>
+    <h2>@item.Employee.Team1.TeamName</h2>
 }
 
 <!-- DataTables CSS -->
@@ -25,10 +25,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                Name
             </th>
             <th>
-                Name
+                @Html.DisplayNameFor(model => model.Employee.Team1.TeamName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TimePeriodBegin)
@@ -48,10 +48,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => item.Employee.FirstName) @Html.DisplayFor(modelItem => item.Employee.LastName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Employee.FirstName) @Html.DisplayFor(modelItem => item.Employee.LastName)
+                    @Html.DisplayFor(modelItem => item.Employee.Team1.TeamName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TimePeriodBegin)

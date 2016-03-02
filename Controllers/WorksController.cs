@@ -320,6 +320,16 @@ namespace EPMSAppDemo.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (work.DateCompleted > work.DateDue)
+                {
+
+                    work.Late = 1;
+
+                }
+                else
+                {
+                    work.Late = 0;
+                }
 
                 //Modify the record and save the changes to the database
                 db.Entry(work).State = EntityState.Modified;
