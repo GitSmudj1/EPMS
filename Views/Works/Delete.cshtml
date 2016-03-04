@@ -60,7 +60,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            Category Name
         </dt>
 
         <dd>
@@ -68,7 +68,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Project.Name)
+            Project Name
         </dt>
 
         <dd>
@@ -89,7 +89,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
             @Html.ActionLink("Back to List", "Index", new { id = Model.Work_Record })
         </div>
     }

@@ -256,7 +256,7 @@ namespace EPMSAppDemo.Controllers
             Record record = db.Records.Find(id);
             db.Records.Remove(record);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Employees");
         }
 
         protected override void Dispose(bool disposing)

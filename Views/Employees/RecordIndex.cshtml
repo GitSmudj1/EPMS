@@ -55,7 +55,11 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("View Record", "WorkIndex", new { id = item.Id }, null)
+                    @Html.ActionLink("View Record", "WorkIndex", new { id = item.Id }, null) |  
+                    @if (item.Status == "Open" && item.Works.Count() == 0)
+                    {
+                    @Html.ActionLink("Delete", "Delete", "Records", new { id = item.Id }, null)
+                    }
                 </td>
             </tr>
         }
