@@ -50,15 +50,6 @@
         <dd>
             @Html.DisplayFor(model => model.SubmittedDate)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Late)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Late)
-        </dd>
-
         <dt>
             Category Name
         </dt>
@@ -94,3 +85,13 @@
         </div>
     }
 </div>
+
+<script>
+
+    var lateVal = $("#Late").html();
+    if (lateVal == 1) {
+        $(this).html("Y");
+    } else if (lateVal == 0) {
+        $(this).html("N");
+    }
+</script>

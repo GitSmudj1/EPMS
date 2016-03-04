@@ -349,6 +349,7 @@ namespace EPMSAppDemo.Controllers
         {
             //Find the work the user wants to delete by using the ID
             Work work = db.Works.Find(id);
+
             if (work == null)
             {
                 return HttpNotFound();
