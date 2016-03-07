@@ -16,13 +16,17 @@ namespace EPMSAppDemo.Models
     public partial class Work
     {
         public int Id { get; set; }
+        [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> DateCompleted { get; set; }
+        [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> DateDue { get; set; }
+        [Required]
         public string WorkItem { get; set; }
+        [Required]
         public string Description { get; set; }
         public Nullable<decimal> HoursWorked { get; set; }
         public Nullable<decimal> HoursRemaining { get; set; }
@@ -30,8 +34,11 @@ namespace EPMSAppDemo.Models
         public System.DateTime SubmittedDate { get; set; }
         public byte[] RowVersion { get; set; }
         public int Work_Record { get; set; }
+        [Required]
         public int Work_Project { get; set; }
+        [Required]
         public int Work_Category { get; set; }
+
         public Nullable<int> Late { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

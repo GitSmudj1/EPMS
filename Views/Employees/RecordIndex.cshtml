@@ -36,6 +36,9 @@
             <th data-column-id="TimePeriodBegin">@Html.DisplayNameFor(model => model.TimePeriodBegin)</th>
             <th data-column-id="TimePeriodEnd">@Html.DisplayNameFor(model => model.TimePeriodEnd)</th>
             <th data-column-id="Status">@Html.DisplayNameFor(model => model.Status)</th>
+            <th>
+                Work Created
+            </th>
             <th data-column-id="Link"></th>
         </tr>
     </thead>
@@ -53,7 +56,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
+                <td>
 
+                    @item.Works.Count()
+
+                </td>
                 <td>
                     @Html.ActionLink("View Record", "WorkIndex", new { id = item.Id }, null) |  
                     @if (item.Status == "Open" && item.Works.Count() == 0)

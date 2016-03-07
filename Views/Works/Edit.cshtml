@@ -42,32 +42,32 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Description, "Description/Comments", htmlAttributes: new { @class = "control-label col-md-2" })
+
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.Description, new { @cols = "90", @rows = "6", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description)
             </div>
         </div>
 
-        <div class="form-group">
+
             @Html.HiddenFor(model => model.HoursWorked)
-        </div>
 
-        <div class="form-group">
+
+
             @Html.HiddenFor(model => model.HoursRemaining)
-        </div>
 
-        <div class="form-group">
+
             @Html.HiddenFor(model => model.SubmittedDate)
-        </div>
+ 
 
-        <div class="form-group">
+      
             @Html.HiddenFor(model => model.RowVersion)
-        </div>
+    
 
-        <div class="form-group">
+   
             @Html.HiddenFor(model => model.Work_Record)
-        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Work_Project, "Work_Project", htmlAttributes: new { @class = "control-label col-md-2" })

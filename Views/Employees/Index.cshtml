@@ -58,6 +58,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Team)
         </th>
+        <th>
+            Records
+        </th>
         <th></th>
     </tr>
         </thead>
@@ -81,6 +84,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Team1.TeamName)
+        </td>
+        <td>
+            @item.Records.Count()
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
