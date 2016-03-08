@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AdminRecordsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PerformancesController.cs" />
@@ -417,9 +418,12 @@
     <Content Include="Views\AdminRecords\Details.cshtml" />
     <Content Include="Views\AdminRecords\Edit.cshtml" />
     <Content Include="Views\AdminRecords\Index.cshtml" />
+    <Content Include="Views\Shared\ErrorT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Error\" />
+    <Folder Include="Views\ErrorPage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

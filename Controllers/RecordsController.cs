@@ -17,6 +17,18 @@ namespace EPMSAppDemo.Controllers
     {
         private EPMSDevEntities db = new EPMSDevEntities();
 
+       /* public ActionResult CheckUser()
+        {
+            //Get user name from the browser and use it to query the db
+            var username = System.Web.HttpContext.Current.User.Identity.Name;
+            var searchForUser = db.Employees.Count(i => i.UserName == username);
+            if (searchForUser == 0)
+{
+                return RedirectToAction("Shared", "Error");
+}
+            return View();
+        }*/
+
         // Use this static method to check if the logged in user is a team leader
         public static bool isManager()
         {
@@ -24,8 +36,14 @@ namespace EPMSAppDemo.Controllers
 
             //Get user name from the browser and use it to query the db
             var username = System.Web.HttpContext.Current.User.Identity.Name;
-            if (username != "")
+
+            var searchForUser = db.Employees.Count(i => i.UserName == username);
+            if (username != "" && searchForUser != 0)
             {
+                /*if (searchForUser == 0)
+                {
+                    RecordsController.Redirect();
+                }*/
                 //Get user's ID
                 var userid = db.Employees.FirstOrDefault(i => i.UserName == username).Id;
                 //get ismanager value
@@ -44,12 +62,18 @@ namespace EPMSAppDemo.Controllers
             return false;
         }
 
+       // public static ActionResult Redirect()
+       // {
+         //   return RedirectToAction("Shared", "Error");
+        //}
+
         // GET: Records
         public ActionResult Index()
         {
             var username = @System.Web.HttpContext.Current.User.Identity.Name;
+            var searchForUser = db.Employees.Count(i => i.UserName == username);
 
-            if (username != "")
+            if (username != "" && searchForUser != 0)
             {
                 //get the current user's id
                 var getUser = db.Employees.First(i => i.UserName == username).Id;
@@ -59,6 +83,9 @@ namespace EPMSAppDemo.Controllers
 
 
                 return View(records.ToList());
+            } else if (searchForUser > 0)
+            {
+                return RedirectToAction("shared", "error");
             }
             return View();
         }

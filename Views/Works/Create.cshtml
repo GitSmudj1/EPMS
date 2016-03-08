@@ -150,6 +150,10 @@
         dateDue.setAttribute('type', 'text');
     }
 
+    if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
+        alert("EPMS User - You are using Firefox. Please make sure dates are entered in the format dd/MM/YYYY and within your record dates.")
+    }
+
 
     /*jQuery("#DateCompleted").datepicker({
         inline: true,
