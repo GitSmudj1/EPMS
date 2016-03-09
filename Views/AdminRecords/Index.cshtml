@@ -1,16 +1,11 @@
 ﻿@model IEnumerable<EPMSAppDemo.Models.Record>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Submitted Record";
 }
 
 <h2>Submitted Records</h2>
 
-</style>
-@foreach (var item in Model.Take(1))
-{
-    <h2>@item.Employee.Team1.TeamName</h2>
-}
 
 <!-- DataTables CSS -->
 <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">

@@ -26,7 +26,7 @@ namespace EPMSAppDemo.Controllers
 
             var records = db.Records.Where(i => i.Employee.Team == userTeam && i.Status == "Submitted" || i.Employee.Employee_Employee == userId && i.Status == "Submitted");
 
-            return View(records.ToList());
+            return View(records.Where(i => i.Employee.UserName != @User.Identity.Name).ToList());
         }
 
         //

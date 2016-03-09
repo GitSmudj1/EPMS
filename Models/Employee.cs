@@ -30,6 +30,8 @@ namespace EPMSAppDemo.Models
         [Required]
         public string LastName { get; set; }
         [Required]
+        [Display(Name = "Email/UserName")]
+        [EmailAddress]
         public string UserName { get; set; }
         public byte[] RowVersion { get; set; }
         [DisplayName("Manager")]
