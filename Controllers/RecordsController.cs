@@ -70,7 +70,9 @@ namespace EPMSAppDemo.Controllers
         // GET: Records
         public ActionResult Index()
         {
+            //Get the current logged in user from the db
             var username = @System.Web.HttpContext.Current.User.Identity.Name;
+            //See if they exist in the db
             var searchForUser = db.Employees.Count(i => i.UserName == username);
 
             if (username != "" && searchForUser != 0)
@@ -78,11 +80,13 @@ namespace EPMSAppDemo.Controllers
                 //get the current user's id
                 var getUser = db.Employees.First(i => i.UserName == username).Id;
 
-                //return the current user's performance pages using the id 
+                //grab all records for this user
                 var records = db.Records.Where(i => i.Record_Employee == getUser);
 
-
+                //return a list of these records
                 return View(records.ToList());
+
+
             } else if (searchForUser > 0)
             {
                 return RedirectToAction("shared", "error");

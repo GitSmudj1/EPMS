@@ -16,7 +16,7 @@ namespace EPMSAppDemo.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your Employee Performance Management System";
+            ViewBag.Message = "Employee Performance Management System";
 
             return View();
         }

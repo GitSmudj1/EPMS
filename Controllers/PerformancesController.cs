@@ -20,9 +20,11 @@ namespace EPMSAppDemo.Controllers
         public async Task<ActionResult> email(FormCollection form, int Id)
         {
             var getRecordEmployee = db.Records.First(i => i.Id == Id).Record_Employee;
+            var getGrade = db.Performances.First(i => i.RecordId == Id).Status;
+            var getEmployeeName = db.Employees.First(i => i.Id == getRecordEmployee).FirstName;
             var name = form["sname"];
             var email = form["semail"];
-            var messages = "A recent record has been graded by your manager. Please log on to the system using your details to view your performance page.";
+            var messages = "Dear " + getEmployeeName + ",\n \n A recent record has been graded as " + getGrade + " by your manager. Please see http://epmsappdemo.azurewebsites.net/ and log on to the system using your details to view your performance page.";
             var phone = form["sphone"];
             var x = await SendEmail(name, email, messages, phone, Id);
             if (x == "sent")
@@ -33,6 +35,7 @@ namespace EPMSAppDemo.Controllers
         {
             var getRecordEmployee = db.Records.First(i => i.Id == Id).Record_Employee;
             var getEmployeeEmail = db.Employees.First(i => i.Id == getRecordEmployee).UserName;
+            var getEmployeeName = db.Employees.First(i => i.Id == getRecordEmployee).FirstName;
             var message = new MailMessage();
             message.To.Add(new MailAddress(getEmployeeEmail));  // replace with receiver's email id  
             message.From = new MailAddress("EPMSdonotreply@outlook.com");  // replace with sender's email id 
@@ -59,7 +62,7 @@ namespace EPMSAppDemo.Controllers
         {
             EPMSDevEntities db = new EPMSDevEntities();
 
-            //Get user name from the browser and use it to query the db
+            //Get username from the browser and use it to query the db
             var username = System.Web.HttpContext.Current.User.Identity.Name;
             if (username != "")
             {
