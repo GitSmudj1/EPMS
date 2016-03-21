@@ -11,9 +11,7 @@ namespace EPMSAppDemo.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,22 +21,16 @@ namespace EPMSAppDemo.Models
             this.Records = new HashSet<Record>();
             this.Teams = new HashSet<Team>();
         }
-
+    
         public int Id { get; set; }
-        [Required]
         public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
-        [Required]
-        [Display(Name = "Email/UserName")]
-        [EmailAddress]
         public string UserName { get; set; }
         public byte[] RowVersion { get; set; }
-        [DisplayName("Manager")]
         public Nullable<int> Employee_Employee { get; set; }
         public bool IsActive { get; set; }
         public int Team { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Performance> Performances { get; set; }
         public virtual Employee Employees1 { get; set; }

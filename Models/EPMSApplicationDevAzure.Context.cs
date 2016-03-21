@@ -32,19 +32,5 @@ namespace EPMSAppDemo.Models
         public virtual DbSet<Record> Records { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<Work> Works { get; set; }
-        public virtual DbSet<aspnet_Applications> aspnet_Applications { get; set; }
-        public virtual DbSet<aspnet_Membership> aspnet_Membership { get; set; }
-        public virtual DbSet<aspnet_Profile> aspnet_Profile { get; set; }
-        public virtual DbSet<aspnet_Roles> aspnet_Roles { get; set; }
-        public virtual DbSet<aspnet_SchemaVersions> aspnet_SchemaVersions { get; set; }
-        public virtual DbSet<aspnet_Users> aspnet_Users { get; set; }
-        public virtual DbSet<aspnet_UsersInRoles> aspnet_UsersInRoles { get; set; }
-        public virtual DbSet<RolePermission> RolePermissions { get; set; }
-        public virtual DbSet<vw_aspnet_Applications> vw_aspnet_Applications { get; set; }
-        public virtual DbSet<vw_aspnet_MembershipUsers> vw_aspnet_MembershipUsers { get; set; }
-        public virtual DbSet<vw_aspnet_Profiles> vw_aspnet_Profiles { get; set; }
-        public virtual DbSet<vw_aspnet_Roles> vw_aspnet_Roles { get; set; }
-        public virtual DbSet<vw_aspnet_Users> vw_aspnet_Users { get; set; }
-        public virtual DbSet<vw_aspnet_UsersInRoles> vw_aspnet_UsersInRoles { get; set; }
     }
 }

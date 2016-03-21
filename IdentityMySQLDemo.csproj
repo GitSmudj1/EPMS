@@ -182,27 +182,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\aspnet_Applications.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aspnet_Membership.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aspnet_Profile.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aspnet_Roles.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aspnet_SchemaVersions.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aspnet_Users.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\aspnet_UsersInRoles.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
     </Compile>
@@ -236,28 +215,7 @@
     <Compile Include="Models\Record.cs">
       <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RolePermission.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Team.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vw_aspnet_Applications.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vw_aspnet_MembershipUsers.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vw_aspnet_Profiles.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vw_aspnet_Roles.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vw_aspnet_Users.cs">
-      <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vw_aspnet_UsersInRoles.cs">
       <DependentUpon>EPMSApplicationDevAzure.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Work.cs">

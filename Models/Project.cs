@@ -11,8 +11,7 @@ namespace EPMSAppDemo.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Project
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,11 +19,9 @@ namespace EPMSAppDemo.Models
         {
             this.Works = new HashSet<Work>();
         }
-
+    
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
         public string Description { get; set; }
         public byte[] RowVersion { get; set; }
         public bool IsActive { get; set; }
@@ -39,7 +36,7 @@ namespace EPMSAppDemo.Models
         public bool Trainers { get; set; }
         public bool BusinessServicesDelivery { get; set; }
         public bool BusinessServicesAnalysis { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Work> Works { get; set; }
     }

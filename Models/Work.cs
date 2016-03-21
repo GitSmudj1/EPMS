@@ -24,8 +24,12 @@ namespace EPMSAppDemo.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> DateDue { get; set; }
+
+
         [Required]
         public string WorkItem { get; set; }
+
+
         [Required]
         public string Description { get; set; }
         public Nullable<decimal> HoursWorked { get; set; }

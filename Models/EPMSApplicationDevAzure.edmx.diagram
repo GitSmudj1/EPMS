@@ -4,28 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5dd1597a45954d1a9479d5c84e7dc24d" Name="Diagram1">
-        <EntityTypeShape EntityType="EPMSDevModel.Category" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.Employee" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.Performance" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.Project" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.Record" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.Team" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.Work" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.aspnet_Applications" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.aspnet_Membership" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.aspnet_Profile" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.aspnet_Roles" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.aspnet_SchemaVersions" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.aspnet_Users" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.aspnet_UsersInRoles" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.RolePermission" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.vw_aspnet_Applications" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.vw_aspnet_MembershipUsers" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.vw_aspnet_Profiles" Width="1.5" PointX="11.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.vw_aspnet_Roles" Width="1.5" PointX="11.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.vw_aspnet_Users" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMSDevModel.vw_aspnet_UsersInRoles" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+      <Diagram DiagramId="5dd1597a45954d1a9479d5c84e7dc24d" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="EPMSDevModel.Category" Width="1.5" PointX="7.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMSDevModel.Employee" Width="1.5" PointX="5.875" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMSDevModel.Performance" Width="1.5" PointX="7.875" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMSDevModel.Project" Width="1.5" PointX="10" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMSDevModel.Record" Width="1.5" PointX="0.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMSDevModel.Team" Width="1.5" PointX="0.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMSDevModel.Work" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
         <AssociationConnector Association="EPMSDevModel.FK_Work_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="EPMSDevModel.FK_Employee_Performance" ManuallyRouted="false" />
         <AssociationConnector Association="EPMSDevModel.FK_Employees_Employees" ManuallyRouted="false" />
