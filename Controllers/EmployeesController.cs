@@ -12,6 +12,7 @@ namespace EPMSAppDemo.Controllers
 {
     public class EmployeesController : Controller
     {
+        //Controller used for managing employees in the system
         private EPMSDevEntities db = new EPMSDevEntities();
 
         // GET: /Employees/
@@ -46,6 +47,7 @@ namespace EPMSAppDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //Find employees details based on the id given
             Employee employee = db.Employees.Find(id);
             if (employee == null)
             {
@@ -57,16 +59,15 @@ namespace EPMSAppDemo.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
+
             ViewBag.Employee_Employee = new SelectList(db.Employees, "Id", "FirstName");
+            //Create new employee and pass it into the post method
             Employee employee = new Employee();
 
             return View(employee);
         }
 
         // POST: Employees/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //
         // POST: /Employees/Create
 
         [HttpPost]
@@ -76,6 +77,7 @@ namespace EPMSAppDemo.Controllers
         {
             //get the current user's team using the username
             var usersTeam = db.Employees.Single(i => i.UserName == @User.Identity.Name).Team1.TeamName;
+            //Grab the integer value for this employee team
             var usersTeamNum = db.Employees.Single(i => i.UserName == @User.Identity.Name).Team;
             //get the current user's id using the username
             var usersId = db.Employees.First(i => i.UserName == @User.Identity.Name).Id;
@@ -93,7 +95,7 @@ namespace EPMSAppDemo.Controllers
                 employee.Team = usersTeamNum;
 
                 db.Employees.Add(employee);
-
+                //Try and add employee to the database and save, if not possible then populate the error message
                 try
                 {
                     db.SaveChanges();
@@ -129,21 +131,22 @@ namespace EPMSAppDemo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //Find employee to be changed using the id
             Employee employee = db.Employees.Find(id);
             if (employee == null)
             {
                 return HttpNotFound();
             }
+            //Pass it to the post method
             return View(employee);
         }
 
         // POST: Employees/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Employee employee)
         {
+            //Grab the manager's id to reset it when information is saved
             var currentEmployeeId = db.Employees.First(i => i.UserName == @User.Identity.Name).Id;
             if (ModelState.IsValid)
             {
@@ -157,6 +160,7 @@ namespace EPMSAppDemo.Controllers
             return View(employee);
         }
 
+        //This is the method that shows the index of the manager's employee's records
         public ActionResult RecordIndex(int id = 0)
         {
       
@@ -175,8 +179,8 @@ namespace EPMSAppDemo.Controllers
         }
 
         //
-        // GET: Admin view for timeentries
-
+        // GET: Admin view for employee's Work
+        //This is the method that shows the index of the manager's employee's work
         public ActionResult WorkIndex(int id = 0)
         {
             //get employee using the id parameter
@@ -188,7 +192,7 @@ namespace EPMSAppDemo.Controllers
             //grab all the pieces of work relevant to the specific employee
             var entries = db.Works.Where(i => i.Record.Employee.UserName == employeeUsername && i.Work_Record == id)
                 .OrderByDescending(i => i.DateCompleted);
-
+            //Create a new instance of pieces of work model 
             var timeEntries = new PiecesOfWork
             {
                 RecordId = id,

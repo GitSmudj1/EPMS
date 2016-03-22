@@ -10,6 +10,8 @@ using EPMSAppDemo.Models;
 
 namespace EPMSAppDemo.Controllers
 {
+    //Controller that is used to manage the submitted records screen that managers can see when they login
+    //Inherits methods from a Controller Abstract Class
     public class AdminRecordsController : Controller
     {
         private EPMSDevEntities db = new EPMSDevEntities();
@@ -21,11 +23,13 @@ namespace EPMSAppDemo.Controllers
         {
             //This is the integer value for the current user's team
             var userTeam = db.Employees.First(i => i.UserName == @User.Identity.Name).Team;
-
+            //Get the Id of the logged in user
             var userId = db.Employees.First(i => i.UserName == @User.Identity.Name).Id;
 
+            //Pull records from employees that this user managers
             var records = db.Records.Where(i => i.Employee.Team == userTeam && i.Status == "Submitted" || i.Employee.Employee_Employee == userId && i.Status == "Submitted");
 
+            //Return them as a list in the view which is then rendered into a table in the view
             return View(records.Where(i => i.Employee.UserName != @User.Identity.Name).ToList());
         }
 
@@ -34,6 +38,7 @@ namespace EPMSAppDemo.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            //Find the record in the database using the id
             Record timesheet = db.Records.Find(id);
             if (timesheet == null)
             {
@@ -44,7 +49,7 @@ namespace EPMSAppDemo.Controllers
 
         //
         // GET: /AdminREcords/Create
-
+        
         public ActionResult Create()
         {
             ViewBag.TimeSheet_Employee = new SelectList(db.Employees, "Id", "FirstName");
@@ -53,7 +58,7 @@ namespace EPMSAppDemo.Controllers
 
         //
         // POST: /AdminRecords/Create
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Record record)

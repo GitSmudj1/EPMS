@@ -11,7 +11,8 @@ namespace EPMSAppDemo
 {
     public partial class Startup
     {
-        // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
+
+        // Startup authentication class that is provided by asp .net with identity to start the authentication process for the system
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request

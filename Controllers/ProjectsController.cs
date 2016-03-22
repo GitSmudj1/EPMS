@@ -11,6 +11,7 @@ namespace TimeTracker.Controllers
 {
     public class ProjectsController : Controller
     {
+        //Controller to manage the projects in the system
         private EPMSDevEntities db = new EPMSDevEntities();
 
         //
@@ -28,6 +29,7 @@ namespace TimeTracker.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            //grab the project using the id that is passed in
             Project project = db.Projects.Find(id);
             if (project == null)
             {
@@ -51,6 +53,7 @@ namespace TimeTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Project project)
         {
+            //Create the new project and add into the database
             if (ModelState.IsValid)
             {
                 project.Id = db.Projects.Max(i => i.Id + 1);
@@ -67,6 +70,7 @@ namespace TimeTracker.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            //Grab the project using the id that is passed in
             Project project = db.Projects.Find(id);
             if (project == null)
             {
@@ -82,6 +86,7 @@ namespace TimeTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Project project)
         {
+            //Save the changes made
             if (ModelState.IsValid)
             {
                 db.Entry(project).State = EntityState.Modified;

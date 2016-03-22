@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace EPMSAppDemo.Controllers
 {
+
+    //Controller which manages all main pages
     public class HomeController : Controller
     {
         public ActionResult Index()

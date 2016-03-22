@@ -13,10 +13,12 @@ using System.Threading.Tasks;
 
 namespace EPMSAppDemo.Controllers
 {
+    //Controller that deals with the performances and grades given for each submitted record
     public class PerformancesController : Controller
     {
         private EPMSDevEntities db = new EPMSDevEntities();
 
+        //Method that is triggered when a manager grades a record. This creates the email to be sent
         public async Task<ActionResult> email(FormCollection form, int Id)
         {
             var getRecordEmployee = db.Records.First(i => i.Id == Id).Record_Employee;
@@ -31,6 +33,7 @@ namespace EPMSAppDemo.Controllers
             ViewData["esent"] = "Your Message Has Been Sent";
             return RedirectToAction("RecordIndex", "Employees", new { id = getRecordEmployee });
         }
+        //Method sends the email
         private async Task<String> SendEmail(string name, string email, string messages, string phone, int Id)
         {
             var getRecordEmployee = db.Records.First(i => i.Id == Id).Record_Employee;
@@ -46,8 +49,8 @@ namespace EPMSAppDemo.Controllers
             {
                 var credential = new NetworkCredential
                 {
-                    UserName = "EPMSdonotreply@outlook.com",  // replace with sender's email id 
-                    Password = "Txtekgsn1"  // replace with password 
+                    UserName = "EPMSdonotreply@outlook.com",  // sender's email id
+                    Password = "Txtekgsn1"  // Sender password
                 };
                 smtp.Credentials = credential;
                 smtp.Host = "smtp.live.com";
@@ -57,7 +60,8 @@ namespace EPMSAppDemo.Controllers
                 return "sent";
             }
         }
-
+        //Static method that returns a boolean to determine if the logged in user is a manager or not
+        //Used throughout the system
         public static bool isManager()
         {
             EPMSDevEntities db = new EPMSDevEntities();
@@ -101,8 +105,10 @@ namespace EPMSAppDemo.Controllers
         public ActionResult Details(int id)
         {
          
+            //Grab the certain performance page id from the record id given
             var getPerformance = db.Performances.First(i => i.RecordId == id).Id;
 
+            //grab the actual performance page using the performance id
             Performance performance = db.Performances.Find(getPerformance);
             if (performance == null)
             {
@@ -115,6 +121,7 @@ namespace EPMSAppDemo.Controllers
         public ActionResult Create(int id)
         {
             ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "FirstName");
+            //Get the employee id
             var empId = db.Works.First(i => i.Work_Record == id).Record.Record_Employee;
             Performance performance = new Performance();
             performance.RecordId = id;
@@ -130,6 +137,7 @@ namespace EPMSAppDemo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Justification,Aims,Grading,Status,EmployeeId,RecordId")] Performance performance)
         {
+            //Create the new performance record in the db and redirect to change the status of the record
             if (ModelState.IsValid)
             {
                 performance.Id = db.Performances.Max(i => i.Id + 1);

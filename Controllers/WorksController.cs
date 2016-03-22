@@ -13,10 +13,13 @@ using System.Text;
 
 namespace EPMSAppDemo.Controllers
 {
+    /// <summary>
+    /// Controller used to manage the pieces of work in each record
+    /// </summary>
     public class WorksController : Controller
     {
 
- 
+
         //Create a new instance of the database to allow us to access it
         private EPMSDevEntities db = new EPMSDevEntities();
 
@@ -116,7 +119,7 @@ namespace EPMSAppDemo.Controllers
         public ActionResult Details(int id)
         {
 
-            
+
 
             Work work = db.Works.Find(id);
             if (work == null)
@@ -202,13 +205,13 @@ namespace EPMSAppDemo.Controllers
             ViewBag.Work_TimeSheet = new SelectList(db.Records, "Id", "Status");
 
 
-            
+
 
 
             timebegin = db.Records.First(i => i.Id == id).TimePeriodBegin;
             timeend = db.Records.First(i => i.Id == id).TimePeriodEnd;
 
-            
+
 
 
             //Create the new work
@@ -235,24 +238,25 @@ namespace EPMSAppDemo.Controllers
         public ActionResult Create(Work work)
         {
 
-            
+
 
             if (ModelState.IsValid)
             {
-                
-                if(work.DateCompleted > work.DateDue)
+
+                if (work.DateCompleted > work.DateDue)
                 {
 
                     work.Late = 1;
-                    
-                } else
+
+                }
+                else
                 {
                     work.Late = 0;
                 }
-                
+
 
                 work.HoursWorked = 0;
-                work.Id = db.Works.Max(i => i.Id + 1); 
+                work.Id = db.Works.Max(i => i.Id + 1);
                 db.Works.Add(work);
                 try
                 {

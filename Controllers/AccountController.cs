@@ -12,6 +12,7 @@ using EPMSAppDemo.Models;
 
 namespace EPMSAppDemo.Controllers
 {
+    //Controller for managing accounts and authorization
     [Authorize]
     public class AccountController : Controller
     {
@@ -22,6 +23,7 @@ namespace EPMSAppDemo.Controllers
         {
         }
 
+        //Constructor for the class
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
@@ -40,6 +42,7 @@ namespace EPMSAppDemo.Controllers
             }
         }
 
+        //Method to set up user manager which will manage authentication
         public ApplicationUserManager UserManager
         {
             get
@@ -74,7 +77,7 @@ namespace EPMSAppDemo.Controllers
             }
 
            
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            // To enable password failures to trigger account lockout this would change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {

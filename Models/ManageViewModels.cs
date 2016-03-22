@@ -5,6 +5,8 @@ using Microsoft.Owin.Security;
 
 namespace EPMSAppDemo.Models
 {
+    //Model for the authentication information
+    //Phone number, two factor are not implemented yet
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

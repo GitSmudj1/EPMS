@@ -145,7 +145,7 @@
     var ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
     if (ios == true) {
-        alert("EPMS User - You are using an iOS device. Please make sure dates are entered in the format dd/MM/YYYY and within your record dates.");
+        alert("EPMS User - You are using an iOS device. Please make sure dates are entered in the format YYYY-MM-dd and within your record dates.");
         dateComp.setAttribute('type', 'text');
         dateDue.setAttribute('type', 'text');
     }

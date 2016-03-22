@@ -10,6 +10,7 @@ using EPMSAppDemo.Models;
 
 namespace EPMSAppDemo.Controllers
 {
+    //ManageController deals with this signin manager, and was added to the default template.
     [Authorize]
     public class ManageController : Controller
     {

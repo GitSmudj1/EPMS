@@ -14,6 +14,8 @@ using EPMSAppDemo.Models;
 
 namespace EPMSAppDemo
 {
+    //This class includes some inumplemented functionality provided by asp .net that would be included in the application given more time
+    //This is some future functionality that could be addrd to the system.
     public class EmailService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)

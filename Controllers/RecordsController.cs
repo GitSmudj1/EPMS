@@ -15,6 +15,7 @@ namespace EPMSAppDemo.Controllers
 {
     public class RecordsController : Controller
     {
+        //Controller used to manage all the records in the system
         private EPMSDevEntities db = new EPMSDevEntities();
 
        /* public ActionResult CheckUser()
@@ -114,19 +115,18 @@ namespace EPMSAppDemo.Controllers
         {
             //get the current user's id
             var getUser = db.Employees.First(i => i.UserName == User.Identity.Name).Id;
-
+            //get the records for the current user
             var records = db.Records.Where(i => i.Record_Employee == getUser);
-
+            //Count the number of records
             var noRecords = db.Records.Count(i => i.Record_Employee == getUser);
-
+            //Get the date begin for the record (now)
             var startDate = DateTime.Now;
-
+            //If no records exist then the start date is now
             if (noRecords == 0)
             {
-
-
-                startDate = DateTime.Now;
+            startDate = DateTime.Now;
             }
+            //If there are already records for the user then the start date must be for the next three months
             else if (noRecords > 0)
             {
                 var getFirstRecord = records.Max(i => i.Id);
@@ -134,18 +134,10 @@ namespace EPMSAppDemo.Controllers
                 var getPreviousRecordTimeEnd = records.First(i => i.Record_Employee == getUser && i.Id == getFirstRecord).TimePeriodEnd;
                 startDate = getPreviousRecordTimeBegin.AddMonths(3);
             }
-
-
-
-
-
-
-
-            Record record = new Record()
+            //Create the new record that will be passed to the post method
+             Record record = new Record()
             {
-                //Get the values of the current work and insert into the work created
-                //WorkDate = work.WorkDate,
-
+                //Set all values of new record
                 Id = db.Records.Max(i => i.Id + 1),
                 Status = "Open",
                 TimePeriodBegin = startDate,
@@ -157,15 +149,12 @@ namespace EPMSAppDemo.Controllers
         }
 
         // POST: Records/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Record record)
         {
-
             record.Status = "Open";
-
+            //Start of try catch method to add the record to the database
             try
             {
                 if (ModelState.IsValid)
@@ -175,6 +164,7 @@ namespace EPMSAppDemo.Controllers
                     return RedirectToAction("Index");
                 }
             }
+            //If the error is caught then display meaningful error message (as well as custom error page)
             catch (DbEntityValidationException e)
             {
                 // Retrieve the error messages as a list of strings.
@@ -249,8 +239,7 @@ namespace EPMSAppDemo.Controllers
         }
 
         // POST: Records/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Status,SubmittedDate,TimePeriodBegin,TimePeriodEnd,RowVersion,Record_Employee")] Record record)

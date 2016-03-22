@@ -5,7 +5,7 @@ namespace EPMSAppDemo
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
+        //This class includes all bundles needed for javascript, jquery, bootstrap etc
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
